@@ -24,7 +24,10 @@ public class AddTeacher extends JFrame implements ActionListener{
         
         setLayout(null);
         
-        JLabel heading = new JLabel("New Teacher Details");
+        getContentPane().setBackground(new Color(173, 216, 230)); // Set background color
+
+        
+        JLabel heading = new JLabel("New Faculty");
         heading.setBounds(310, 30, 500, 50);
         heading.setFont(new Font("serif", Font.BOLD, 30));
         add(heading);
@@ -38,7 +41,7 @@ public class AddTeacher extends JFrame implements ActionListener{
         tfname.setBounds(200, 150, 150, 30);
         add(tfname);
         
-        JLabel lblfname = new JLabel("Father's Name");
+        JLabel lblfname = new JLabel("Nama Fakultas");
         lblfname.setBounds(400, 150, 200, 30);
         lblfname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblfname);
@@ -47,7 +50,7 @@ public class AddTeacher extends JFrame implements ActionListener{
         tffname.setBounds(600, 150, 150, 30);
         add(tffname);
         
-        JLabel lblempId = new JLabel("Employee Id");
+        JLabel lblempId = new JLabel("Id Fakultas");
         lblempId.setBounds(50, 200, 200, 30);
         lblempId.setFont(new Font("serif", Font.BOLD, 20));
         add(lblempId);
@@ -144,20 +147,20 @@ public class AddTeacher extends JFrame implements ActionListener{
         
         submit = new JButton("Submit");
         submit.setBounds(250, 550, 120, 30);
-        submit.setBackground(Color.BLACK);
+        submit.setBackground(new Color(0, 128, 0)); // Set button background color
         submit.setForeground(Color.WHITE);
         submit.addActionListener(this);
         submit.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(submit);
-        
+
         cancel = new JButton("Cancel");
         cancel.setBounds(450, 550, 120, 30);
-        cancel.setBackground(Color.BLACK);
+        cancel.setBackground(new Color(128, 0, 0)); // Set button background color
         cancel.setForeground(Color.WHITE);
         cancel.addActionListener(this);
         cancel.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(cancel);
-        
+
         setVisible(true);
     }
     

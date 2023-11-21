@@ -15,6 +15,7 @@ public class Login extends JFrame implements ActionListener{
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         
+        
         JLabel lblusername = new JLabel("Username");
         lblusername.setBounds(40, 20, 100, 20);
         add(lblusername);
@@ -60,31 +61,35 @@ public class Login extends JFrame implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == login) {
-            String username = tfusername.getText();
-            String password = tfpassword.getText();
+    if (ae.getSource() == login) {
+        String username = tfusername.getText();
+        String password = tfpassword.getText();
+        
+        String query = "select * from login where username='"+username+"' and password='"+password+"'";
+        
+        try {
+            Conn c = new Conn();
+            ResultSet rs = c.s.executeQuery(query);
             
-            String query = "select * from login where username='"+username+"' and password='"+password+"'";
-            
-            try {
-                Conn c = new Conn();
-                ResultSet rs = c.s.executeQuery(query);
-                
-                if (rs.next()) {
-                    setVisible(false);
-                    new Project();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid username or password");
-                    setVisible(false);
-                }
-                
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (rs.next()) {
+                // Successful login, open the new window
+                setVisible(false);
+                new Project();
+            } else {
+                // Invalid username or password, show an error message
+                JOptionPane.showMessageDialog(null, "Invalid username or password");
+
+                // Do not hide the login page, you can leave it as is
             }
-        } else if (ae.getSource() == cancel) {
-            setVisible(false);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    } else if (ae.getSource() == cancel) {
+        setVisible(false);
     }
+}
+
 
     public static void main(String[] args) {
         new Login();

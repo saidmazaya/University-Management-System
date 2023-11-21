@@ -38,10 +38,16 @@ public class AddStudent extends JFrame implements ActionListener{
         tfname.setBounds(200, 150, 150, 30);
         add(tfname);
         
-        JLabel lblfname = new JLabel("Father's Name");
-        lblfname.setBounds(400, 150, 200, 30);
-        lblfname.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblfname);
+        JLabel lblGender = new JLabel("Gender");
+        lblGender.setBounds(400, 150, 200, 30);
+        lblGender.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblGender);
+
+        String[] genders = {"Laki-laki", "Perempuan"};
+        JComboBox<String> genderComboBox = new JComboBox<>(genders);
+        genderComboBox.setBounds(600, 150, 150, 30);
+        add(genderComboBox);
+
         
         tffname = new JTextField();
         tffname.setBounds(600, 150, 150, 30);
@@ -93,7 +99,7 @@ public class AddStudent extends JFrame implements ActionListener{
         tfemail.setBounds(200, 300, 150, 30);
         add(tfemail);
         
-        JLabel lblx = new JLabel("Class X (%)");
+        JLabel lblx = new JLabel("Prodi");
         lblx.setBounds(400, 300, 200, 30);
         lblx.setFont(new Font("serif", Font.BOLD, 20));
         add(lblx);
