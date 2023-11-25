@@ -2,16 +2,18 @@ package university.management.system;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.*;
 
 public class AddStudent extends JFrame implements ActionListener{
     
-    JTextField tfnama, tfemail ,tfnim, tfalamat, tfnohp, tfgender, tftgllahir, tfprodi, tffakultas;
-    JLabel labelrollno;
+    JTextField tfnama, tfemail, tfalamat, tfnohp, tfgender, tftgllahir, tffakultas, tahunMasuk;
+
+    JLabel lbnim;
     JDateChooser dcdob;
-    JComboBox cbcourse, cbbranch;
+    JComboBox cbcourse, cbprodi, cbstatus, cbcategory;
     JComboBox<String> genderComboBox;
     JButton submit, cancel;
     
@@ -48,21 +50,16 @@ public class AddStudent extends JFrame implements ActionListener{
         genderComboBox = new JComboBox<>(genders);
         genderComboBox.setBounds(600, 150, 150, 30);
         add(genderComboBox);
-
         
-        tfnama = new JTextField();
-        tfnama.setBounds(600, 150, 150, 30);
-        add(tfnama);
+        JLabel lblnim = new JLabel("NIM");
+        lblnim.setBounds(50, 200, 200, 30);
+        lblnim.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblnim);
         
-        JLabel lblrollno = new JLabel("Nim");
-        lblrollno.setBounds(50, 200, 200, 30);
-        lblrollno.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblrollno);
-        
-        labelrollno = new JLabel("1533"+first4);
-        labelrollno.setBounds(200, 200, 200, 30);
-        labelrollno.setFont(new Font("serif", Font.BOLD, 20));
-        add(labelrollno);
+        lbnim = new JLabel("20"+first4);
+        lbnim.setBounds(200, 200, 200, 30);
+        lbnim.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbnim);
         
         JLabel lbldob = new JLabel("Tanggal Lahir");
         lbldob.setBounds(400, 200, 200, 30);
@@ -95,53 +92,66 @@ public class AddStudent extends JFrame implements ActionListener{
         lblemail.setBounds(50, 300, 200, 30);
         lblemail.setFont(new Font("serif", Font.BOLD, 20));
         add(lblemail);
-        
-        tfgender = new JTextField();
-        tfgender.setBounds(200, 300, 150, 30);
-        add(tfgender);
-        
-        JLabel lblx = new JLabel("Prodi");
+
+        tfemail = new JTextField();
+        tfemail.setBounds(200, 300, 150, 30);
+        add(tfemail);
+
+        JLabel lblx = new JLabel("Status");
         lblx.setBounds(400, 300, 200, 30);
         lblx.setFont(new Font("serif", Font.BOLD, 20));
         add(lblx);
-        
-        tftgllahir = new JTextField();
-        tftgllahir.setBounds(600, 300, 150, 30);
-        add(tftgllahir);
-        
-       
-        
-        tfprodi = new JTextField();
-        tfprodi.setBounds(200, 350, 150, 30);
-        add(tfprodi);
-        
-        JLabel lblaadhar = new JLabel("Alamat");
+
+        String status[] = {"New Student", "Exchanged Student", "Reback Student"};
+        cbstatus = new JComboBox(status);
+        cbstatus.setBounds(600, 300, 150, 30);
+        cbstatus.setFont(new Font("serif", Font.BOLD, 15));
+        cbstatus.setBackground(Color.WHITE);
+        add(cbstatus);
+
+        JLabel lblcategory = new JLabel("Kategori");
+        lblcategory.setBounds(50, 350, 200, 30);
+        lblcategory.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblcategory);
+
+
+        String category[] = {"Non Disabilities", "Disabilities"};
+        cbcategory = new JComboBox(category);
+        cbcategory.setBounds(200, 350, 150, 30);
+        cbcategory.setFont(new Font("serif", Font.BOLD, 15));
+        cbcategory.setBackground(Color.WHITE);
+        add(cbcategory);
+
+        JLabel lblaadhar = new JLabel("Tahun Masuk");
         lblaadhar.setBounds(400, 350, 200, 30);
         lblaadhar.setFont(new Font("serif", Font.BOLD, 20));
         add(lblaadhar);
-        
-        
-        JLabel lblcourse = new JLabel("Prodi");
+
+        tahunMasuk = new JTextField();
+        tahunMasuk.setBounds(600, 350, 150, 30);
+        add(tahunMasuk);
+
+        JLabel lblcourse = new JLabel("Fakultas");
         lblcourse.setBounds(50, 400, 200, 30);
         lblcourse.setFont(new Font("serif", Font.BOLD, 20));
         add(lblcourse);
-        
-        String course[] = {"B.Tech", "BBA", "BCA", "Bsc", "Msc", "MBA", "MCA", "MCom", "MA", "BA"};
+
+        String course[] = {"FK", "FH", "FASILKOM-TI", "FHUT", "FISIP"};
         cbcourse = new JComboBox(course);
         cbcourse.setBounds(200, 400, 150, 30);
         cbcourse.setBackground(Color.WHITE);
         add(cbcourse);
-        
-        JLabel lblbranch = new JLabel("Fakultas");
+
+        JLabel lblbranch = new JLabel("Prodi");
         lblbranch.setBounds(400, 400, 200, 30);
         lblbranch.setFont(new Font("serif", Font.BOLD, 20));
         add(lblbranch);
-        
-        String branch[] = {"Computer Science", "Electronics", "Mechanical", "Civil", "IT"};
-        cbbranch = new JComboBox(branch);
-        cbbranch.setBounds(600, 400, 150, 30);
-        cbbranch.setBackground(Color.WHITE);
-        add(cbbranch);
+
+        String tprodi[] = {"Computer Science", "Electronics", "Mechanical", "Civil", "IT"};
+        cbprodi = new JComboBox(tprodi);
+        cbprodi.setBounds(600, 400, 150, 30);
+        cbprodi.setBackground(Color.WHITE);
+        add(cbprodi);
         
         submit = new JButton("Submit");
         submit.setBounds(250, 550, 120, 30);
@@ -166,26 +176,31 @@ public class AddStudent extends JFrame implements ActionListener{
         if (ae.getSource() == submit) {
         String nama = tfnama.getText();
         String gender = (String) genderComboBox.getSelectedItem();
-        String nim = labelrollno.getText();
-        String tgl_lahir = ((JTextField) dcdob.getDateEditor().getUiComponent()).getText();
+        String nim = lbnim.getText();
+        Date selectedDate = dcdob.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String tgl_lahir = dateFormat.format(selectedDate);
         String alamat = tfalamat.getText();
         String no_hp = tfnohp.getText();
         String email = tfemail.getText();
-        String prodi = tfprodi.getText();
-        String fakultas = tffakultas.getText();
-         
-            
-            try {
-                String query = "insert into student values('"+nama+"', '"+gender+"', '"+nim+"', '"+tgl_lahir+"', '"+alamat+"', '"+no_hp+"', '"+email+"', '"+prodi+"', '"+fakultas+"')";
+        String prodi = cbprodi.getSelectedItem().toString();
+        String fakultas = cbcourse.getSelectedItem().toString();
+        String status = cbstatus.getSelectedItem().toString();
+        String kategori = cbcategory.getSelectedItem().toString();
+        String tahun_masuk = tahunMasuk.getText();
 
-                Conn con = new Conn();
-                con.s.executeUpdate(query);
-                
-                JOptionPane.showMessageDialog(null, "Student Details Inserted Successfully");
-                setVisible(false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                try {
+                    // Query SQL
+                    String query = "insert into student values('"+nama+"', '"+gender+"', '"+nim+"', '"+tgl_lahir+"', '"+alamat+"', '"+no_hp+"', '"+email+"', '"+prodi+"', '"+fakultas+"', '"+status+"', '"+kategori+"', '"+tahun_masuk+"')";
+
+                    Conn con = new Conn();
+                    con.s.executeUpdate(query);
+
+                    JOptionPane.showMessageDialog(null, "Student Details Inserted Successfully");
+                    setVisible(false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         } else {
             setVisible(false);
         }

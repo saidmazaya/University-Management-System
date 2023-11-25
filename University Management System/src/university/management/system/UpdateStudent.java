@@ -1,14 +1,17 @@
 package university.management.system;
 
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
 public class UpdateStudent extends JFrame implements ActionListener{
-    
-    JTextField tfcourse, tfaddress, tfphone, tfemail, tfbranch;
+
+    JTextField tfnama, tfemail, tfalamat, tfnohp, tfgender, tfcourse, tfbranch, tahunMasuk;
     JLabel labelrollno;
+    JDateChooser tfdob;
     JButton submit, cancel;
     Choice crollno;
     
@@ -53,16 +56,6 @@ public class UpdateStudent extends JFrame implements ActionListener{
         labelname.setFont(new Font("Tahoma", Font.PLAIN, 18));
         add(labelname);
         
-        JLabel lblfname = new JLabel("Father's Name");
-        lblfname.setBounds(400, 150, 200, 30);
-        lblfname.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblfname);
-        
-        JLabel labelfname = new JLabel();
-        labelfname.setBounds(600, 150, 150, 30);
-        labelfname.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(labelfname);
-        
         JLabel lblrollno = new JLabel("Roll Number");
         lblrollno.setBounds(50, 200, 200, 30);
         lblrollno.setFont(new Font("serif", Font.BOLD, 20));
@@ -72,34 +65,42 @@ public class UpdateStudent extends JFrame implements ActionListener{
         labelrollno.setBounds(200, 200, 200, 30);
         labelrollno.setFont(new Font("Tahoma", Font.PLAIN, 18));
         add(labelrollno);
-        
-        JLabel lbldob = new JLabel("Date of Birth");
+
+        JLabel lblGender = new JLabel("Gender");
+        lblGender.setBounds(400, 150, 200, 30);
+        lblGender.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblGender);
+
+        tfgender = new JTextField();
+        tfgender.setBounds(200, 250, 150, 30);
+        add(tfgender);
+
+        JLabel lbldob = new JLabel("Tanggal Lahir");
         lbldob.setBounds(400, 200, 200, 30);
         lbldob.setFont(new Font("serif", Font.BOLD, 20));
         add(lbldob);
-        
-        JLabel labeldob = new JLabel();
-        labeldob.setBounds(600, 200, 150, 30);
-        labeldob.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(labeldob);
-        
-        JLabel lbladdress = new JLabel("Address");
+
+        tfdob = new JDateChooser();
+        tfdob.setBounds(600, 200, 150, 30);
+        add(tfdob);
+
+        JLabel lbladdress = new JLabel("Alamat");
         lbladdress.setBounds(50, 250, 200, 30);
         lbladdress.setFont(new Font("serif", Font.BOLD, 20));
         add(lbladdress);
         
-        tfaddress = new JTextField();
-        tfaddress.setBounds(200, 250, 150, 30);
-        add(tfaddress);
+        tfalamat = new JTextField();
+        tfalamat.setBounds(200, 250, 150, 30);
+        add(tfalamat);
         
         JLabel lblphone = new JLabel("Phone");
         lblphone.setBounds(400, 250, 200, 30);
         lblphone.setFont(new Font("serif", Font.BOLD, 20));
         add(lblphone);
         
-        tfphone = new JTextField();
-        tfphone.setBounds(600, 250, 150, 30);
-        add(tfphone);
+        tfnohp = new JTextField();
+        tfnohp.setBounds(600, 250, 150, 30);
+        add(tfnohp);
         
         JLabel lblemail = new JLabel("Email Id");
         lblemail.setBounds(50, 300, 200, 30);
@@ -110,71 +111,54 @@ public class UpdateStudent extends JFrame implements ActionListener{
         tfemail.setBounds(200, 300, 150, 30);
         add(tfemail);
         
-        JLabel lblx = new JLabel("Class X (%)");
+        JLabel lblx = new JLabel("Status");
         lblx.setBounds(400, 300, 200, 30);
         lblx.setFont(new Font("serif", Font.BOLD, 20));
         add(lblx);
-        
-        JLabel labelx = new JLabel();
-        labelx.setBounds(600, 300, 150, 30);
-        labelx.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(labelx);
-        
-        JLabel lblxii = new JLabel("Class XII (%)");
-        lblxii.setBounds(50, 350, 200, 30);
-        lblxii.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblxii);
-        
-        JLabel labelxii = new JLabel();
-        labelxii.setBounds(200, 350, 150, 30);
-        labelxii.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(labelxii);
-        
-        JLabel lblaadhar = new JLabel("Aadhar Number");
+
+        JLabel lblaadhar = new JLabel("Tahun Masuk");
         lblaadhar.setBounds(400, 350, 200, 30);
         lblaadhar.setFont(new Font("serif", Font.BOLD, 20));
         add(lblaadhar);
-        
-        JLabel labelaadhar = new JLabel();
-        labelaadhar.setBounds(600, 350, 150, 30);
-        labelaadhar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(labelaadhar);
-        
-        JLabel lblcourse = new JLabel("Course");
+
+        tahunMasuk = new JTextField();
+        tahunMasuk.setBounds(600, 350, 150, 30);
+        add(tahunMasuk);
+
+        JLabel lblcourse = new JLabel("Fakultas");
         lblcourse.setBounds(50, 400, 200, 30);
         lblcourse.setFont(new Font("serif", Font.BOLD, 20));
         add(lblcourse);
-        
+
         tfcourse = new JTextField();
-        tfcourse.setBounds(200, 400, 150, 30);
+        tfcourse.setBounds(600, 400, 150, 30);
         add(tfcourse);
-        
-        JLabel lblbranch = new JLabel("Branch");
+
+        JLabel lblbranch = new JLabel("Prodi");
         lblbranch.setBounds(400, 400, 200, 30);
         lblbranch.setFont(new Font("serif", Font.BOLD, 20));
         add(lblbranch);
-        
+
         tfbranch = new JTextField();
         tfbranch.setBounds(600, 400, 150, 30);
         add(tfbranch);
         
         try {
             Conn c = new Conn();
+            Date selectedDate = (Date) tfdob.getDate();
             String query = "select * from student where rollno='"+crollno.getSelectedItem()+"'";
             ResultSet rs = c.s.executeQuery(query);
             while(rs.next()) {
-                labelname.setText(rs.getString("name"));
-                labelfname.setText(rs.getString("fname"));
-                labeldob.setText(rs.getString("dob"));
-                tfaddress.setText(rs.getString("address"));
-                tfphone.setText(rs.getString("phone"));
+                labelname.setText(rs.getString("nama"));
+                Date dateFromResultSet = rs.getDate("tgl_lahir");
+                tfdob.setDate(dateFromResultSet);
+                tfgender.setText(rs.getString("gender"));
+                tfalamat.setText(rs.getString("alamat"));
+                tfnohp.setText(rs.getString("no_hp"));
                 tfemail.setText(rs.getString("email"));
-                labelx.setText(rs.getString("class_x"));
-                labelxii.setText(rs.getString("class_xii"));
-                labelaadhar.setText(rs.getString("aadhar"));
-                labelrollno.setText(rs.getString("rollno"));
-                tfcourse.setText(rs.getString("course"));
-                tfbranch.setText(rs.getString("branch"));
+                tahunMasuk.setText(rs.getString("tahun_masuk"));
+                tfcourse.setText(rs.getString("fakultas"));
+                tfbranch.setText(rs.getString("prodi"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,18 +171,15 @@ public class UpdateStudent extends JFrame implements ActionListener{
                     String query = "select * from student where rollno='"+crollno.getSelectedItem()+"'";
                     ResultSet rs = c.s.executeQuery(query);
                     while(rs.next()) {
-                        labelname.setText(rs.getString("name"));
-                        labelfname.setText(rs.getString("fname"));
-                        labeldob.setText(rs.getString("dob"));
-                        tfaddress.setText(rs.getString("address"));
-                        tfphone.setText(rs.getString("phone"));
+                        labelname.setText(rs.getString("nama"));
+                        Date dateFromResultSet = rs.getDate("tgl_lahir");
+                        tfdob.setDate(dateFromResultSet);;
+                        tfgender.setText(rs.getString("gender"));
+                        tfalamat.setText(rs.getString("address"));
                         tfemail.setText(rs.getString("email"));
-                        labelx.setText(rs.getString("class_x"));
-                        labelxii.setText(rs.getString("class_xii"));
-                        labelaadhar.setText(rs.getString("aadhar"));
-                        labelrollno.setText(rs.getString("rollno"));
-                        tfcourse.setText(rs.getString("course"));
-                        tfbranch.setText(rs.getString("branch"));
+                        tahunMasuk.setText(rs.getString("tahun_masuk"));
+                        tfcourse.setText(rs.getString("fakultas"));
+                        tfbranch.setText(rs.getString("prodi"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -228,14 +209,14 @@ public class UpdateStudent extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == submit) {
             String rollno = labelrollno.getText();
-            String address = tfaddress.getText();
-            String phone = tfphone.getText();
+            String address = tfalamat.getText();
+            String phone = tfnohp.getText();
             String email = tfemail.getText();
             String course = tfcourse.getText();
             String branch = tfbranch.getText();
             
             try {
-                String query = "update student set address='"+address+"', phone='"+phone+"', email='"+email+"', course='"+course+"', branch='"+branch+"' where rollno='"+rollno+"'";
+                String query = "update student set alamat='"+address+"', no_hp='"+phone+"', email='"+email+"', fakultas='"+course+"', prodi='"+branch+"' where idprodi='"+rollno+" ";
                 Conn con = new Conn();
                 con.s.executeUpdate(query);
                 

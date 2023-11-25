@@ -19,7 +19,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         
         setLayout(null);
         
-        JLabel heading = new JLabel("Update Teacher Details");
+        JLabel heading = new JLabel("Update Prodi Details");
         heading.setBounds(50, 10, 500, 50);
         heading.setFont(new Font("Tahoma", Font.ITALIC, 35));
         add(heading);
@@ -35,7 +35,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from teacher");
+            ResultSet rs = c.s.executeQuery("select * from prodi");
             while(rs.next()) {
                 cEmpId.add(rs.getString("empId"));
             }
@@ -43,7 +43,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
             e.printStackTrace();
         }
         
-        JLabel lblname = new JLabel("Name");
+        JLabel lblname = new JLabel("Nama");
         lblname.setBounds(50, 150, 100, 30);
         lblname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblname);

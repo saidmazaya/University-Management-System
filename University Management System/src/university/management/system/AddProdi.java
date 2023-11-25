@@ -113,9 +113,9 @@ public class AddProdi extends JFrame implements ActionListener{
         tfxii = new JTextField();
         tfxii.setBounds(200, 350, 150, 30);
         add(tfxii);
-        
-       
-        
+
+
+
         JLabel lblcourse = new JLabel("Jenjang");
         lblcourse.setBounds(50, 400, 200, 30);
         lblcourse.setFont(new Font("serif", Font.BOLD, 20));
