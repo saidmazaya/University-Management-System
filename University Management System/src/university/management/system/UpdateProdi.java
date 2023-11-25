@@ -6,8 +6,8 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class UpdateProdi extends JFrame implements ActionListener{
-    
-    JTextField tfcourse, tfaddress, tfphone, tfemail, tfbranch;
+
+    JTextField tfname, tfcourse, tfaddress, tfphone, tfemail, tfbranch, tfxii, tfaadhar;
     JLabel labelEmpId;
     JButton submit, cancel;
     Choice cEmpId;
@@ -24,7 +24,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         heading.setFont(new Font("Tahoma", Font.ITALIC, 35));
         add(heading);
         
-        JLabel lblrollnumber = new JLabel("Select Employee Id");
+        JLabel lblrollnumber = new JLabel("Pilih Id Prodi");
         lblrollnumber.setBounds(50, 100, 200, 20);
         lblrollnumber.setFont(new Font("serif", Font.PLAIN, 20));
         add(lblrollnumber);
@@ -43,7 +43,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
             e.printStackTrace();
         }
         
-        JLabel lblname = new JLabel("Nama");
+        JLabel lblname = new JLabel("Nama Prodi");
         lblname.setBounds(50, 150, 100, 30);
         lblname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblname);
@@ -53,7 +53,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         labelname.setFont(new Font("Tahoma", Font.PLAIN, 18));
         add(labelname);
         
-        JLabel lblfname = new JLabel("Father's Name");
+        JLabel lblfname = new JLabel("Nama Fakultas");
         lblfname.setBounds(400, 150, 200, 30);
         lblfname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblfname);
@@ -63,7 +63,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         labelfname.setFont(new Font("Tahoma", Font.PLAIN, 18));
         add(labelfname);
         
-        JLabel lblrollno = new JLabel("Employee Id");
+        JLabel lblrollno = new JLabel("Id Prodi");
         lblrollno.setBounds(50, 200, 200, 30);
         lblrollno.setFont(new Font("serif", Font.BOLD, 20));
         add(lblrollno);
@@ -73,7 +73,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         labelEmpId.setFont(new Font("Tahoma", Font.PLAIN, 18));
         add(labelEmpId);
         
-        JLabel lbldob = new JLabel("Date of Birth");
+        JLabel lbldob = new JLabel("Tanggal berdiri");
         lbldob.setBounds(400, 200, 200, 30);
         lbldob.setFont(new Font("serif", Font.BOLD, 20));
         add(lbldob);
@@ -83,7 +83,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         labeldob.setFont(new Font("Tahoma", Font.PLAIN, 18));
         add(labeldob);
         
-        JLabel lbladdress = new JLabel("Address");
+        JLabel lbladdress = new JLabel("Alamat");
         lbladdress.setBounds(50, 250, 200, 30);
         lbladdress.setFont(new Font("serif", Font.BOLD, 20));
         add(lbladdress);

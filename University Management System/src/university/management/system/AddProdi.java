@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class AddProdi extends JFrame implements ActionListener{
     
-    JTextField tfname, tffname, tfaddress, tfphone, tfemail, tfx, tfxii, tfaadhar;
+    JTextField tfname, tffname, tfaddress, tfmahasiswa, tfemail, tfx, tfxii, tfaadhar;
     JLabel labelempId;
     JDateChooser dcdob;
     JComboBox cbcourse, cbbranch;
@@ -83,9 +83,9 @@ public class AddProdi extends JFrame implements ActionListener{
         lblphone.setFont(new Font("serif", Font.BOLD, 20));
         add(lblphone);
         
-        tfphone = new JTextField();
-        tfphone.setBounds(600, 250, 150, 30);
-        add(tfphone);
+        tfmahasiswa = new JTextField();
+        tfmahasiswa.setBounds(600, 250, 150, 30);
+        add(tfmahasiswa);
         
         JLabel lblemail = new JLabel("Email Prodi");
         lblemail.setBounds(50, 300, 200, 30);
@@ -113,8 +113,6 @@ public class AddProdi extends JFrame implements ActionListener{
         tfxii = new JTextField();
         tfxii.setBounds(200, 350, 150, 30);
         add(tfxii);
-
-
 
         JLabel lblcourse = new JLabel("Jenjang");
         lblcourse.setBounds(50, 400, 200, 30);
@@ -154,7 +152,7 @@ public class AddProdi extends JFrame implements ActionListener{
             String rollno = labelempId.getText();
             String dob = ((JTextField) dcdob.getDateEditor().getUiComponent()).getText();
             String address = tfaddress.getText();
-            String phone = tfphone.getText();
+            String phone = tfmahasiswa.getText();
             String email = tfemail.getText();
             String x = tfx.getText();
             String xii = tfxii.getText();
