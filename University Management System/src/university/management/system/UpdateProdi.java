@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class UpdateTeacher extends JFrame implements ActionListener{
+public class UpdateProdi extends JFrame implements ActionListener{
     
     JTextField tfcourse, tfaddress, tfphone, tfemail, tfbranch;
     JLabel labelEmpId;
     JButton submit, cancel;
     Choice cEmpId;
     
-    UpdateTeacher() {
+    UpdateProdi() {
         
         setSize(900, 650);
         setLocation(350, 50);
@@ -250,6 +250,6 @@ public class UpdateTeacher extends JFrame implements ActionListener{
     }
     
     public static void main(String[] args) {
-        new UpdateTeacher();
+        new UpdateProdi();
     }
 }
