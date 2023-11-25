@@ -105,6 +105,10 @@ public class UpdateStudent extends JFrame implements ActionListener{
         lblx.setFont(new Font("serif", Font.BOLD, 20));
         add(lblx);
 
+        tfstatus = new JTextField();
+        tfstatus.setBounds(600, 400, 150, 30);
+        add(tfstatus);
+
         JLabel lblaadhar = new JLabel("Tahun Masuk");
         lblaadhar.setBounds(400, 350, 200, 30);
         lblaadhar.setFont(new Font("serif", Font.BOLD, 20));
@@ -148,6 +152,7 @@ public class UpdateStudent extends JFrame implements ActionListener{
                 tahunMasuk.setText(rs.getString("tahun_masuk"));
                 tfcourse.setText(rs.getString("fakultas"));
                 tfbranch.setText(rs.getString("prodi"));
+                tfstatus.setText(rs.getString("status"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,6 +174,8 @@ public class UpdateStudent extends JFrame implements ActionListener{
                         tahunMasuk.setText(rs.getString("tahun_masuk"));
                         tfcourse.setText(rs.getString("fakultas"));
                         tfbranch.setText(rs.getString("prodi"));
+                        tfstatus.setText(rs.getString("status"));
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
