@@ -46,25 +46,14 @@ public class UpdateStudent extends JFrame implements ActionListener{
             e.printStackTrace();
         }
         
-        JLabel lblname = new JLabel("Name");
+        JLabel lblname = new JLabel("Nama");
         lblname.setBounds(50, 150, 100, 30);
         lblname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblname);
-        
-        JLabel labelname = new JLabel();
-        labelname.setBounds(200, 150, 150, 30);
-        labelname.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(labelname);
-        
-        JLabel lblrollno = new JLabel("Roll Number");
-        lblrollno.setBounds(50, 200, 200, 30);
-        lblrollno.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblrollno);
-        
-        labelrollno = new JLabel();
-        labelrollno.setBounds(200, 200, 200, 30);
-        labelrollno.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(labelrollno);
+
+        tfnama = new JTextField();
+        tfnama.setBounds(200, 150, 150, 30);
+        add(tfnama);
 
         JLabel lblGender = new JLabel("Gender");
         lblGender.setBounds(400, 150, 200, 30);
@@ -102,7 +91,7 @@ public class UpdateStudent extends JFrame implements ActionListener{
         tfnohp.setBounds(600, 250, 150, 30);
         add(tfnohp);
         
-        JLabel lblemail = new JLabel("Email Id");
+        JLabel lblemail = new JLabel("Email");
         lblemail.setBounds(50, 300, 200, 30);
         lblemail.setFont(new Font("serif", Font.BOLD, 20));
         add(lblemail);
