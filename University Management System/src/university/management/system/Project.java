@@ -23,7 +23,7 @@ public class Project extends JFrame implements ActionListener {
         newInformation.setForeground(Color.BLUE);
         mb.add(newInformation);
         
-        JMenuItem facultyInfo = new JMenuItem("Add New Faculty");
+        JMenuItem facultyInfo = new JMenuItem("Add New Prodi");
         facultyInfo.setBackground(Color.WHITE);
         facultyInfo.addActionListener(this);
         newInformation.add(facultyInfo);
@@ -38,7 +38,7 @@ public class Project extends JFrame implements ActionListener {
         details.setForeground(Color.RED);
         mb.add(details);
         
-        JMenuItem facultydetails = new JMenuItem("View Faculty Details");
+        JMenuItem facultydetails = new JMenuItem("View Prodi Details");
         facultydetails.setBackground(Color.WHITE);
         facultydetails.addActionListener(this);
         details.add(facultydetails);
@@ -47,32 +47,7 @@ public class Project extends JFrame implements ActionListener {
         studentdetails.setBackground(Color.WHITE);
         studentdetails.addActionListener(this);
         details.add(studentdetails);
-        
-        // course
-        JMenu leave = new JMenu("Apply Course");
-        leave.setForeground(Color.BLUE);
-        mb.add(leave);
-        
-        JMenuItem facultyleave = new JMenuItem("Add Course");
-        facultyleave.setBackground(Color.WHITE);
-        facultyleave.addActionListener(this);
-        leave.add(facultyleave);
     
-        
-        // Leave Details
-        JMenu leaveDetails = new JMenu("Course Details");
-        leaveDetails.setForeground(Color.RED);
-        mb.add(leaveDetails);
-        
-        JMenuItem facultyleavedetails = new JMenuItem("Course");
-        facultyleavedetails.setBackground(Color.WHITE);
-        facultyleavedetails.addActionListener(this);
-        leaveDetails.add(facultyleavedetails);
-        
-        
-        
-       
-        
         // UpdateInfo
         JMenu updateInfo = new JMenu("Update Details");
         updateInfo.setForeground(Color.RED);
@@ -90,17 +65,7 @@ public class Project extends JFrame implements ActionListener {
         
         
         
-       
-        
-        // about
-        JMenu about = new JMenu("About");
-        about.setForeground(Color.BLUE);
-        mb.add(about);
-        
-        JMenuItem ab = new JMenuItem("About");
-        ab.setBackground(Color.WHITE);
-        ab.addActionListener(this);
-        about.add(ab);
+     
         
         // exit
         JMenu exit = new JMenu("Exit");
@@ -123,30 +88,19 @@ public class Project extends JFrame implements ActionListener {
         if (msg.equals("Exit")) {
             setVisible(false);
         } 
-        else if (msg.equals("Add New Faculty")) {
-            new AddTeacher();
+        else if (msg.equals("Add New Prodi")) {
+            new AddProdi();
         } else if (msg.equals("Add New Student")) {
             new AddStudent();
         } else if (msg.equals("View Faculty Details")) {
-            new TeacherDetails();
+            new ProdiDetails();
         } else if (msg.equals("View Student Details")) {
             new StudentDetails();
-        } else if (msg.equals("Add Course")) {
-            new TeacherLeave();
         }  else if (msg.equals("Update Faculty Details")) {
-            new UpdateTeacher();
+            new UpdateProdi();
         } else if (msg.equals("Update Student Details")) {
             new UpdateStudent();
-        } else if (msg.equals("Enter Marks")) {
-            new EnterMarks();
-        } else if (msg.equals("Examination Results")) {
-            new ExaminationDetails();
-        } else if (msg.equals("Fee Structure")) {
-            new FeeStructure();
-        } else if (msg.equals("About")) {
-            new About();
-        } else if (msg.equals("Student Fee Form")) {
-            new StudentFeeForm();
+
         }
     }
 

@@ -6,13 +6,13 @@ import java.sql.*;
 import net.proteanit.sql.DbUtils;
 import java.awt.event.*;
 
-public class TeacherDetails extends JFrame implements ActionListener {
+public class ProdiDetails extends JFrame implements ActionListener {
 
     Choice cEmpId;
     JTable table;
     JButton search, print, update, add, cancel;
     
-    TeacherDetails() {
+    ProdiDetails() {
         
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -97,16 +97,16 @@ public class TeacherDetails extends JFrame implements ActionListener {
             }
         } else if (ae.getSource() == add) {
             setVisible(false);
-            new AddTeacher();
+            new AddProdi();
         } else if (ae.getSource() == update) {
             setVisible(false);
-            new UpdateTeacher();
+            new UpdateProdi();
         } else {
             setVisible(false);
         }
     }
 
     public static void main(String[] args) {
-        new TeacherDetails();
+        new ProdiDetails();
     }
 }
