@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 
 public class UpdateStudent extends JFrame implements ActionListener {
 
-    JTextField tfnama, tfemail, tfalamat, tfnohp, tfgender, tftgllahir, tffakultas, tahunMasuk;
+    JTextField tfnama, tfemail, tfalamat, tfnohp, tahunMasuk;
     JLabel lbnim;
     JDateChooser dcdob;
     JComboBox cbcourse, cbprodi, cbstatus, cbcategory, cbgender;
@@ -29,10 +29,10 @@ public class UpdateStudent extends JFrame implements ActionListener {
         heading.setFont(new Font("Tahoma", Font.ITALIC, 35));
         add(heading);
 
-        JLabel lblrollnumber = new JLabel("Select Roll Number");
-        lblrollnumber.setBounds(50, 100, 200, 20);
-        lblrollnumber.setFont(new Font("serif", Font.PLAIN, 20));
-        add(lblrollnumber);
+        JLabel lblselnim = new JLabel("Select NIM");
+        lblselnim.setBounds(50, 100, 200, 20);
+        lblselnim.setFont(new Font("serif", Font.PLAIN, 20));
+        add(lblselnim);
 
         nim = new Choice();
         nim.setBounds(250, 100, 200, 20);
@@ -65,6 +65,7 @@ public class UpdateStudent extends JFrame implements ActionListener {
         String[] genders = {"Laki-laki", "Perempuan"};
         cbgender = new JComboBox(genders);
         cbgender.setBounds(600, 150, 150, 30);
+        cbgender.setBackground(Color.WHITE);
         add(cbgender);
 
         JLabel lblnim = new JLabel("NIM");

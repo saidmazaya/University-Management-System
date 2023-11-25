@@ -17,7 +17,7 @@ public class StudentDetails extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
-        JLabel heading = new JLabel("Search by Roll Number");
+        JLabel heading = new JLabel("Search by NIM");
         heading.setBounds(20, 20, 150, 20);
         add(heading);
 

@@ -2,6 +2,7 @@ package university.management.system;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
@@ -9,11 +10,11 @@ import java.awt.event.*;
 
 public class AddStudent extends JFrame implements ActionListener{
     
-    JTextField tfnama, tfemail, tfalamat, tfnohp, tfgender, tftgllahir, tffakultas, tahunMasuk;
+    JTextField tfnama, tfemail, tfalamat, tfnohp, tahunMasuk;
 
     JLabel lbnim;
     JDateChooser dcdob;
-    JComboBox cbcourse, cbprodi, cbstatus, cbcategory;
+    JComboBox cbfakultas, cbprodi, cbstatus, cbcategory;
     JComboBox<String> genderComboBox;
     JButton submit, cancel;
     
@@ -49,6 +50,7 @@ public class AddStudent extends JFrame implements ActionListener{
         String[] genders = {"Laki-laki", "Perempuan"};
         genderComboBox = new JComboBox<>(genders);
         genderComboBox.setBounds(600, 150, 150, 30);
+        genderComboBox.setBackground(Color.WHITE);
         add(genderComboBox);
         
         JLabel lblnim = new JLabel("NIM");
@@ -137,18 +139,18 @@ public class AddStudent extends JFrame implements ActionListener{
         add(lblcourse);
 
         String course[] = {"FK", "FH", "FASILKOM-TI", "FHUT", "FISIP"};
-        cbcourse = new JComboBox(course);
-        cbcourse.setBounds(200, 400, 150, 30);
-        cbcourse.setBackground(Color.WHITE);
-        add(cbcourse);
+        cbfakultas = new JComboBox(course);
+        cbfakultas.setBounds(200, 400, 150, 30);
+        cbfakultas.setBackground(Color.WHITE);
+        add(cbfakultas);
 
         JLabel lblbranch = new JLabel("Prodi");
         lblbranch.setBounds(400, 400, 200, 30);
         lblbranch.setFont(new Font("serif", Font.BOLD, 20));
         add(lblbranch);
 
-        String tprodi[] = {"Computer Science", "Electronics", "Mechanical", "Civil", "IT"};
-        cbprodi = new JComboBox(tprodi);
+        cbprodi = new JComboBox();
+        updateProdiComboBox();
         cbprodi.setBounds(600, 400, 150, 30);
         cbprodi.setBackground(Color.WHITE);
         add(cbprodi);
@@ -171,6 +173,30 @@ public class AddStudent extends JFrame implements ActionListener{
         
         setVisible(true);
     }
+
+    // UpdateProdiComboBox method to set the model for cbprodi
+    private void updateProdiComboBox() {
+        try {
+            // Query to retrieve "Prodi" values from the database
+            String query = "SELECT DISTINCT nama_prodi FROM prodi";
+
+            Conn con = new Conn();
+            java.sql.PreparedStatement pst = con.c.prepareStatement(query);
+
+            // Execute query
+            ResultSet rs = pst.executeQuery();
+
+            // Populate the "Prodi" JComboBox with the retrieved values
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            while (rs.next()) {
+                model.addElement(rs.getString("nama_prodi"));
+            }
+
+            cbprodi.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == submit) {
@@ -184,7 +210,7 @@ public class AddStudent extends JFrame implements ActionListener{
         String no_hp = tfnohp.getText();
         String email = tfemail.getText();
         String prodi = cbprodi.getSelectedItem().toString();
-        String fakultas = cbcourse.getSelectedItem().toString();
+        String fakultas = cbfakultas.getSelectedItem().toString();
         String status = cbstatus.getSelectedItem().toString();
         String kategori = cbcategory.getSelectedItem().toString();
         String tahun_masuk = tahunMasuk.getText();

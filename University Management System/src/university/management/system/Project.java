@@ -53,7 +53,7 @@ public class Project extends JFrame implements ActionListener {
         updateInfo.setForeground(Color.RED);
         mb.add(updateInfo);
         
-        JMenuItem updatefacultyinfo = new JMenuItem("Update Faculty Details");
+        JMenuItem updatefacultyinfo = new JMenuItem("Update Prodi Details");
         updatefacultyinfo.setBackground(Color.WHITE);
         updatefacultyinfo.addActionListener(this);
         updateInfo.add(updatefacultyinfo);
@@ -62,10 +62,16 @@ public class Project extends JFrame implements ActionListener {
         updatestudentinfo.setBackground(Color.WHITE);
         updatestudentinfo.addActionListener(this);
         updateInfo.add(updatestudentinfo);
-        
-        
-        
-     
+
+        // UpdateInfo
+        JMenu aboutInfo = new JMenu("About");
+        aboutInfo.setForeground(Color.BLUE);
+        mb.add(aboutInfo);
+
+        JMenuItem about = new JMenuItem("About");
+        about.setBackground(Color.WHITE);
+        about.addActionListener(this);
+        aboutInfo.add(about);
         
         // exit
         JMenu exit = new JMenu("Exit");
@@ -92,7 +98,7 @@ public class Project extends JFrame implements ActionListener {
             new AddProdi();
         } else if (msg.equals("Add New Student")) {
             new AddStudent();
-        } else if (msg.equals("View Faculty Details")) {
+        } else if (msg.equals("View Prodi Details")) {
             new ProdiDetails();
         } else if (msg.equals("View Student Details")) {
             new StudentDetails();
@@ -100,7 +106,8 @@ public class Project extends JFrame implements ActionListener {
             new UpdateProdi();
         } else if (msg.equals("Update Student Details")) {
             new UpdateStudent();
-
+        } else if (msg.equals("About")) {
+            new About();
         }
     }
 

@@ -22,17 +22,17 @@ public class About extends JFrame {
         heading.setFont(new Font("Tahoma", Font.BOLD, 30));
         add(heading);
         
-        JLabel name = new JLabel("Developed By: Code for Interview");
+        JLabel name = new JLabel("Developed By: PBOL Kel 5");
         name.setBounds(70, 220, 550, 40);
         name.setFont(new Font("Tahoma", Font.BOLD, 30));
         add(name);
         
-        JLabel rollno = new JLabel("Roll number: 1533146");
+        JLabel rollno = new JLabel("Roll number: 221402-005,014,129");
         rollno.setBounds(70, 280, 550, 40);
         rollno.setFont(new Font("Tahoma", Font.PLAIN, 30));
         add(rollno);
         
-        JLabel contact = new JLabel("Contact: codeforinterview03@gmail.com");
+        JLabel contact = new JLabel("Contact: @bpintar.combehh");
         contact.setBounds(70, 340, 550, 40);
         contact.setFont(new Font("Tahoma", Font.PLAIN, 20));
         add(contact);
