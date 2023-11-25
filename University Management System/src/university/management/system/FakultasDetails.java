@@ -8,31 +8,31 @@ import net.proteanit.sql.DbUtils;
 
 import java.awt.event.*;
 
-public class ProdiDetails extends JFrame implements ActionListener {
+public class FakultasDetails extends JFrame implements ActionListener {
 
-    Choice lblprodId;
+    Choice lblFakId;
     JTable table;
     JButton search, print, update, add, cancel;
 
-    ProdiDetails() {
+    FakultasDetails() {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
-        JLabel heading = new JLabel("Search by Prodi Id");
+        JLabel heading = new JLabel("Search by Faculty Id");
         heading.setBounds(20, 20, 150, 20);
         add(heading);
 
-        lblprodId = new Choice();
-        lblprodId.setBounds(180, 20, 150, 20);
-        lblprodId.insert("Semua Data", 0);
-        add(lblprodId);
+        lblFakId = new Choice();
+        lblFakId.setBounds(180, 20, 150, 20);
+        lblFakId.insert("Semua Data", 0);
+        add(lblFakId);
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from prodi");
+            ResultSet rs = c.s.executeQuery("select * from fakultas");
             while (rs.next()) {
-                lblprodId.add(rs.getString("id_prodi"));
+                lblFakId.add(rs.getString("id_fakultas"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class ProdiDetails extends JFrame implements ActionListener {
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from prodi");
+            ResultSet rs = c.s.executeQuery("select * from fakultas");
             table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,13 +84,13 @@ public class ProdiDetails extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-            String selectedProdId = lblprodId.getSelectedItem();
+            String selectedFakId = lblFakId.getSelectedItem();
 
-            if ("Semua Data".equals(selectedProdId)) {
+            if ("Semua Data".equals(selectedFakId)) {
                 // Show all data without considering nim
                 try {
                     Conn c = new Conn();
-                    ResultSet rs = c.s.executeQuery("select * from prodi");
+                    ResultSet rs = c.s.executeQuery("select * from fakultas");
                     table.setModel(DbUtils.resultSetToTableModel(rs));
 
                 } catch (Exception e) {
@@ -98,7 +98,7 @@ public class ProdiDetails extends JFrame implements ActionListener {
                 }
             } else {
                 // Search by the selected nim
-                String query = "select * from prodi where id_prodi = '" + selectedProdId + "'";
+                String query = "select * from fakultas where id_fakultas = '" + selectedFakId + "'";
                 try {
                     Conn c = new Conn();
                     ResultSet rs = c.s.executeQuery(query);
@@ -120,10 +120,10 @@ public class ProdiDetails extends JFrame implements ActionListener {
             }
         } else if (ae.getSource() == add) {
             setVisible(false);
-            new AddProdi();
+            new AddFakultas();
         } else if (ae.getSource() == update) {
             setVisible(false);
-            new UpdateProdi();
+            new UpdateFakultas();
         } else {
             setVisible(false);
         }

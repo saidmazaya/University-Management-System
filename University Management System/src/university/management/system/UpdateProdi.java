@@ -8,42 +8,42 @@ import java.awt.event.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
-public class UpdateProdi extends JFrame implements ActionListener{
+public class UpdateProdi extends JFrame implements ActionListener {
 
-    JTextField tfnama, tfalamat, tfmahasiswa, tfstaff, tfdosen, tffakultas, tfemail;
+    JTextField tfnama, tfalamat, tfmahasiswa, tfstaff, tfdosen, tfemail;
     JLabel labelProdId;
     JButton submit, cancel;
 
     JDateChooser dcdob;
     Choice cProdId;
 
-    JComboBox cbjenjang;
-    
+    JComboBox cbjenjang, cbfakultas;
+
     UpdateProdi() {
-        
+
         setSize(900, 650);
         setLocation(350, 50);
-        
+
         setLayout(null);
-        
+
         JLabel heading = new JLabel("Update Prodi Details");
         heading.setBounds(50, 10, 500, 50);
         heading.setFont(new Font("Tahoma", Font.ITALIC, 35));
         add(heading);
-        
-        JLabel lblrollnumber = new JLabel("Pilih Id Prodi");
-        lblrollnumber.setBounds(50, 100, 200, 20);
-        lblrollnumber.setFont(new Font("serif", Font.PLAIN, 20));
-        add(lblrollnumber);
-        
+
+        JLabel lblidProd = new JLabel("Pilih Id Prodi");
+        lblidProd.setBounds(50, 100, 200, 20);
+        lblidProd.setFont(new Font("serif", Font.PLAIN, 20));
+        add(lblidProd);
+
         cProdId = new Choice();
         cProdId.setBounds(250, 100, 200, 20);
         add(cProdId);
-        
+
         try {
             Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from prodi");
-            while(rs.next()) {
+            while (rs.next()) {
                 cProdId.add(rs.getString("id_prodi"));
             }
         } catch (Exception e) {
@@ -64,9 +64,11 @@ public class UpdateProdi extends JFrame implements ActionListener{
         lblfname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblfname);
 
-        tffakultas = new JTextField();
-        tffakultas.setBounds(600, 150, 150, 30);
-        add(tffakultas);
+        cbfakultas = new JComboBox();
+        selectFakultasComboBox();
+        cbfakultas.setBounds(600, 150, 150, 30);
+        cbfakultas.setBackground(Color.WHITE);
+        add(cbfakultas);
 
         JLabel lblProdId = new JLabel("Id Prodi");
         lblProdId.setBounds(50, 200, 200, 30);
@@ -114,68 +116,50 @@ public class UpdateProdi extends JFrame implements ActionListener{
         tfemail.setBounds(200, 300, 150, 30);
         add(tfemail);
 
-        JLabel lblx = new JLabel("Jumlah Dosen");
-        lblx.setBounds(400, 300, 200, 30);
-        lblx.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblx);
+        JLabel lbljumDos = new JLabel("Jumlah Dosen");
+        lbljumDos.setBounds(400, 300, 200, 30);
+        lbljumDos.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbljumDos);
 
         tfdosen = new JTextField();
         tfdosen.setBounds(600, 300, 150, 30);
         add(tfdosen);
 
-        JLabel lblxii = new JLabel("Jumlah Staff");
-        lblxii.setBounds(50, 350, 200, 30);
-        lblxii.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblxii);
+        JLabel lbljumStaf = new JLabel("Jumlah Staff");
+        lbljumStaf.setBounds(50, 350, 200, 30);
+        lbljumStaf.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbljumStaf);
 
         tfstaff = new JTextField();
         tfstaff.setBounds(200, 350, 150, 30);
         add(tfstaff);
 
-        JLabel lblcourse = new JLabel("Jenjang");
-        lblcourse.setBounds(400, 350, 200, 30);
-        lblcourse.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblcourse);
+        JLabel lblJenj = new JLabel("Jenjang");
+        lblJenj.setBounds(400, 350, 200, 30);
+        lblJenj.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblJenj);
 
         String course[] = {"D-3", "D-4", "S-1", "S-2", "S-3"};
         cbjenjang = new JComboBox(course);
         cbjenjang.setBounds(600, 350, 150, 30);
         cbjenjang.setBackground(Color.WHITE);
         add(cbjenjang);
-        
-        try {
-            Conn c = new Conn();
-            String query = "select * from prodi where id_prodi='"+ cProdId.getSelectedItem()+"'";
-            ResultSet rs = c.s.executeQuery(query);
-            while(rs.next()) {
-                tfnama.setText(rs.getString("nama_prodi"));
-                labelProdId.setText(rs.getString("id_prodi"));
-                tfmahasiswa.setText(rs.getString("mahasiswa_aktif"));
-                tfalamat.setText(rs.getString("alamat"));
-                tfemail.setText(rs.getString("email"));
-                tffakultas.setText(rs.getString("nama_fakultas"));
-                tfdosen.setText(rs.getString("jumlah_dosen"));
-                tfstaff.setText(rs.getString("jumlah_staff"));
-                cbjenjang.setSelectedItem(rs.getString("jenjang"));
 
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
         cProdId.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                 try {
                     Conn c = new Conn();
-                    String query = "select * from prodi where id_prodi='"+ cProdId.getSelectedItem()+"'";
+                    String query = "select * from prodi where id_prodi='" + cProdId.getSelectedItem() + "'";
                     ResultSet rs = c.s.executeQuery(query);
-                    while(rs.next()) {
+                    while (rs.next()) {
                         tfnama.setText(rs.getString("nama_prodi"));
                         labelProdId.setText(rs.getString("id_prodi"));
+                        Date dateFromResultSet = rs.getDate("tanggal_berdiri");
+                        dcdob.setDate(dateFromResultSet);
                         tfmahasiswa.setText(rs.getString("mahasiswa_aktif"));
                         tfalamat.setText(rs.getString("alamat"));
                         tfemail.setText(rs.getString("email"));
-                        tffakultas.setText(rs.getString("nama_fakultas"));
+                        cbfakultas.setSelectedItem(rs.getString("nama_fakultas"));
                         tfdosen.setText(rs.getString("jumlah_dosen"));
                         tfstaff.setText(rs.getString("jumlah_staff"));
                         cbjenjang.setSelectedItem(rs.getString("jenjang"));
@@ -186,7 +170,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
                 }
             }
         });
-        
+
         submit = new JButton("Update");
         submit.setBounds(250, 500, 120, 30);
         submit.setBackground(Color.BLACK);
@@ -194,7 +178,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
         submit.addActionListener(this);
         submit.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(submit);
-        
+
         cancel = new JButton("Cancel");
         cancel.setBounds(450, 500, 120, 30);
         cancel.setBackground(Color.BLACK);
@@ -202,8 +186,31 @@ public class UpdateProdi extends JFrame implements ActionListener{
         cancel.addActionListener(this);
         cancel.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(cancel);
-        
+
         setVisible(true);
+    }
+
+    private void selectFakultasComboBox() {
+        try {
+            // Query to retrieve "Prodi" values from the database
+            String query = "SELECT DISTINCT nama_fakultas FROM fakultas";
+
+            Conn con = new Conn();
+            java.sql.PreparedStatement pst = con.c.prepareStatement(query);
+
+            // Execute query
+            ResultSet rs = pst.executeQuery();
+
+            // Populate the "Prodi" JComboBox with the retrieved values
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            while (rs.next()) {
+                model.addElement(rs.getString("nama_fakultas"));
+            }
+
+            cbfakultas.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -212,7 +219,7 @@ public class UpdateProdi extends JFrame implements ActionListener{
             String alamat = tfalamat.getText();
             String nama_prodi = tfnama.getText();
             String email = tfemail.getText();
-            String nama_fakultas = tffakultas.getText();
+            String nama_fakultas = cbfakultas.getSelectedItem().toString();
             String jumlah_dosen = tfdosen.getText();
             String jumlah_staff = tfstaff.getText();
             String mahasiswa_aktif = tfmahasiswa.getText();
@@ -255,6 +262,6 @@ public class UpdateProdi extends JFrame implements ActionListener{
 
 
     public static void main(String[] args) {
-        new UpdateProdi();
+        new UpdateFakultas();
     }
 }

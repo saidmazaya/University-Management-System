@@ -2,17 +2,20 @@ package university.management.system;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 import com.toedter.calendar.JDateChooser;
+
 import java.awt.event.*;
 
-public class AddProdi extends JFrame implements ActionListener{
+public class AddProdi extends JFrame implements ActionListener {
 
-    JTextField tfnama, tffakultas, tfalamat, tfmahasiswa, tfemail, tfdosen, tfstaff;
+    JTextField tfnama, tfalamat, tfmahasiswa, tfemail, tfdosen, tfstaff;
     JLabel labelprodId;
     JDateChooser dcdob;
-    JComboBox cbjenjang;
+    JComboBox cbjenjang, cbfakultas;
     JButton submit, cancel;
 
     Random ran = new Random();
@@ -47,16 +50,18 @@ public class AddProdi extends JFrame implements ActionListener{
         lblfname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblfname);
 
-        tffakultas = new JTextField();
-        tffakultas.setBounds(600, 150, 150, 30);
-        add(tffakultas);
+        cbfakultas = new JComboBox();
+        selectFakultasComboBox();
+        cbfakultas.setBounds(600, 150, 150, 30);
+        cbfakultas.setBackground(Color.WHITE);
+        add(cbfakultas);
 
         JLabel lblprodId = new JLabel("Id Prodi");
         lblprodId.setBounds(50, 200, 200, 30);
         lblprodId.setFont(new Font("serif", Font.BOLD, 20));
         add(lblprodId);
 
-        labelprodId = new JLabel("101"+first4);
+        labelprodId = new JLabel("101" + first4);
         labelprodId.setBounds(200, 200, 200, 30);
         labelprodId.setFont(new Font("serif", Font.BOLD, 20));
         add(labelprodId);
@@ -97,28 +102,28 @@ public class AddProdi extends JFrame implements ActionListener{
         tfemail.setBounds(200, 300, 150, 30);
         add(tfemail);
 
-        JLabel lblx = new JLabel("Jumlah Dosen");
-        lblx.setBounds(400, 300, 200, 30);
-        lblx.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblx);
+        JLabel lbljumDos = new JLabel("Jumlah Dosen");
+        lbljumDos.setBounds(400, 300, 200, 30);
+        lbljumDos.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbljumDos);
 
         tfdosen = new JTextField();
         tfdosen.setBounds(600, 300, 150, 30);
         add(tfdosen);
 
-        JLabel lblxii = new JLabel("Jumlah Staff");
-        lblxii.setBounds(50, 350, 200, 30);
-        lblxii.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblxii);
+        JLabel lbljumStaf = new JLabel("Jumlah Staff");
+        lbljumStaf.setBounds(50, 350, 200, 30);
+        lbljumStaf.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbljumStaf);
 
         tfstaff = new JTextField();
         tfstaff.setBounds(200, 350, 150, 30);
         add(tfstaff);
 
-        JLabel lblcourse = new JLabel("Jenjang");
-        lblcourse.setBounds(400, 350, 200, 30);
-        lblcourse.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblcourse);
+        JLabel lbljenjang = new JLabel("Jenjang");
+        lbljenjang.setBounds(400, 350, 200, 30);
+        lbljenjang.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbljenjang);
 
         String course[] = {"D-3", "D-4", "S-1", "S-2", "S-3"};
         cbjenjang = new JComboBox(course);
@@ -146,10 +151,33 @@ public class AddProdi extends JFrame implements ActionListener{
         setVisible(true);
     }
 
+    private void selectFakultasComboBox() {
+        try {
+            // Query to retrieve "Prodi" values from the database
+            String query = "SELECT DISTINCT nama_fakultas FROM fakultas";
+
+            Conn con = new Conn();
+            java.sql.PreparedStatement pst = con.c.prepareStatement(query);
+
+            // Execute query
+            ResultSet rs = pst.executeQuery();
+
+            // Populate the "Prodi" JComboBox with the retrieved values
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            while (rs.next()) {
+                model.addElement(rs.getString("nama_fakultas"));
+            }
+
+            cbfakultas.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == submit) {
             String nama_prodi = tfnama.getText();
-            String nama_fakultas = tffakultas.getText();
+            String nama_fakultas = cbfakultas.getSelectedItem().toString();
             String email = tfemail.getText();
             String id_prodi = labelprodId.getText();
             Date selectedDate = dcdob.getDate();
@@ -162,7 +190,7 @@ public class AddProdi extends JFrame implements ActionListener{
             String jenjang = (String) cbjenjang.getSelectedItem();
 
             try {
-                String query = "insert into prodi values('"+nama_prodi+"', '"+nama_fakultas+"', '"+email+"', '"+id_prodi+"', '"+tanggal_berdiri+"', '"+alamat+"', '"+mahasiswa_aktif+"', '"+jumlah_dosen+"', '"+jumlah_staff+"','"+jenjang+"')";
+                String query = "insert into prodi values('" + nama_prodi + "', '" + nama_fakultas + "', '" + email + "', '" + id_prodi + "', '" + tanggal_berdiri + "', '" + alamat + "', '" + mahasiswa_aktif + "', '" + jumlah_dosen + "', '" + jumlah_staff + "','" + jenjang + "')";
 
                 Conn con = new Conn();
                 con.s.executeUpdate(query);

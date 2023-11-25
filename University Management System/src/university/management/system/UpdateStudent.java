@@ -13,7 +13,7 @@ public class UpdateStudent extends JFrame implements ActionListener {
     JTextField tfnama, tfemail, tfalamat, tfnohp, tahunMasuk;
     JLabel lbnim;
     JDateChooser dcdob;
-    JComboBox cbcourse, cbprodi, cbstatus, cbcategory, cbgender;
+    JComboBox cbfakultas, cbprodi, cbstatus, cbcategory, cbgender;
     JButton submit, cancel;
     Choice nim;
 
@@ -114,10 +114,10 @@ public class UpdateStudent extends JFrame implements ActionListener {
         tfemail.setBounds(200, 300, 150, 30);
         add(tfemail);
 
-        JLabel lblx = new JLabel("Status");
-        lblx.setBounds(400, 300, 200, 30);
-        lblx.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblx);
+        JLabel lblsts = new JLabel("Status");
+        lblsts.setBounds(400, 300, 200, 30);
+        lblsts.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblsts);
 
         String status[] = {"New Student", "Exchanged Student", "Reback Student", "Drop Out", "Graduated"};
         cbstatus = new JComboBox(status);
@@ -138,33 +138,46 @@ public class UpdateStudent extends JFrame implements ActionListener {
         cbcategory.setBackground(Color.WHITE);
         add(cbcategory);
 
-        JLabel lblaadhar = new JLabel("Tahun Masuk");
-        lblaadhar.setBounds(400, 350, 200, 30);
-        lblaadhar.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblaadhar);
+        JLabel lblenyear = new JLabel("Tahun Masuk");
+        lblenyear.setBounds(400, 350, 200, 30);
+        lblenyear.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblenyear);
 
         tahunMasuk = new JTextField();
         tahunMasuk.setBounds(600, 350, 150, 30);
         add(tahunMasuk);
 
-        JLabel lblcourse = new JLabel("Fakultas");
-        lblcourse.setBounds(50, 400, 200, 30);
-        lblcourse.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblcourse);
+        JLabel lblfakultas = new JLabel("Fakultas");
+        lblfakultas.setBounds(50, 400, 200, 30);
+        lblfakultas.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblfakultas);
 
-        String course[] = {"FK", "FH", "FASILKOM-TI", "FHUT", "FISIP"};
-        cbcourse = new JComboBox(course);
-        cbcourse.setBounds(200, 400, 150, 30);
-        cbcourse.setBackground(Color.WHITE);
-        add(cbcourse);
+        cbfakultas = new JComboBox();
+        selectFakultasComboBox();
+        cbfakultas.setBounds(200, 400, 150, 30);
+        cbfakultas.setBackground(Color.WHITE);
 
-        JLabel lblbranch = new JLabel("Prodi");
-        lblbranch.setBounds(400, 400, 200, 30);
-        lblbranch.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblbranch);
+        // Add an ActionListener to cbfakultas to update cbprodi when a faculty is selected
+        cbfakultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the selected faculty
+                String selectedFakultas = cbfakultas.getSelectedItem().toString();
 
-        String tprodi[] = {"Computer Science", "Electronics", "Mechanical", "Civil", "IT"};
-        cbprodi = new JComboBox(tprodi);
+                // Update the "Prodi" JComboBox based on the selected "Fakultas"
+                selectProdiComboBox(selectedFakultas);
+            }
+        });
+
+        add(cbfakultas);
+
+        JLabel lblprodi = new JLabel("Prodi");
+        lblprodi.setBounds(400, 400, 200, 30);
+        lblprodi.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblprodi);
+
+        cbprodi = new JComboBox();
+        selectProdiComboBox(cbfakultas.getSelectedItem().toString());
         cbprodi.setBounds(600, 400, 150, 30);
         cbprodi.setBackground(Color.WHITE);
         add(cbprodi);
@@ -190,7 +203,7 @@ public class UpdateStudent extends JFrame implements ActionListener {
                             tfnohp.setText(rs.getString("no_hp"));
                             tfemail.setText(rs.getString("email"));
                             tahunMasuk.setText(rs.getString("tahun_masuk"));
-                            cbcourse.setSelectedItem(rs.getString("fakultas"));
+                            cbfakultas.setSelectedItem(rs.getString("fakultas"));
                             cbprodi.setSelectedItem(rs.getString("prodi"));
                             cbstatus.setSelectedItem(rs.getString("status"));
                             cbcategory.setSelectedItem(rs.getString("kategori"));
@@ -240,6 +253,55 @@ public class UpdateStudent extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    private void selectProdiComboBox(String selectedFakultas) {
+        try {
+            // Query to retrieve "Prodi" values from the database based on the selected "Fakultas"
+            String query = "SELECT DISTINCT nama_prodi FROM prodi WHERE nama_fakultas = ?";
+
+            Conn con = new Conn();
+            java.sql.PreparedStatement pst = con.c.prepareStatement(query);
+
+            // Set the selected fakultas as a parameter in the query
+            pst.setString(1, selectedFakultas);
+
+            // Execute query
+            ResultSet rs = pst.executeQuery();
+
+            // Populate the "Prodi" JComboBox with the retrieved values
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            while (rs.next()) {
+                model.addElement(rs.getString("nama_prodi"));
+            }
+
+            cbprodi.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void selectFakultasComboBox() {
+        try {
+            // Query to retrieve "Prodi" values from the database
+            String query = "SELECT DISTINCT nama_fakultas FROM fakultas";
+
+            Conn con = new Conn();
+            java.sql.PreparedStatement pst = con.c.prepareStatement(query);
+
+            // Execute query
+            ResultSet rs = pst.executeQuery();
+
+            // Populate the "Prodi" JComboBox with the retrieved values
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            while (rs.next()) {
+                model.addElement(rs.getString("nama_fakultas"));
+            }
+
+            cbfakultas.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == submit) {
             String nimValue = nim.getSelectedItem(); // Assuming nim is your NIM Choice
@@ -252,7 +314,7 @@ public class UpdateStudent extends JFrame implements ActionListener {
             String no_hp = tfnohp.getText();
             String email = tfemail.getText();
             String prodi = cbprodi.getSelectedItem().toString();
-            String fakultas = cbcourse.getSelectedItem().toString();
+            String fakultas = cbfakultas.getSelectedItem().toString();
             String status = cbstatus.getSelectedItem().toString();
             String kategori = cbcategory.getSelectedItem().toString();
             String tahun_masuk = tahunMasuk.getText();

@@ -3,7 +3,9 @@ package university.management.system;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
+
 import net.proteanit.sql.DbUtils;
+
 import java.awt.event.*;
 
 public class StudentDetails extends JFrame implements ActionListener {
@@ -29,7 +31,7 @@ public class StudentDetails extends JFrame implements ActionListener {
         try {
             Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from student");
-            while(rs.next()) {
+            while (rs.next()) {
                 lbnim.add(rs.getString("nim"));
             }
         } catch (Exception e) {
