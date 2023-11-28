@@ -131,6 +131,6 @@ public class ProdiDetails extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new FakultasDetails();
+        new ProdiDetails();
     }
 }
