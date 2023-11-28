@@ -21,8 +21,8 @@ public class AddFakultas extends JFrame implements ActionListener {
 
     AddFakultas() {
 
-        setSize(900, 700);
-        setLocation(350, 50);
+        setSize(900, 500);
+        setLocationRelativeTo(null);
 
         setLayout(null);
 
@@ -81,7 +81,7 @@ public class AddFakultas extends JFrame implements ActionListener {
         add(tfalamat);
 
         submit = new JButton("Submit");
-        submit.setBounds(250, 550, 120, 30);
+        submit.setBounds(300, 400, 120, 30);
         submit.setBackground(new Color(0, 128, 0)); // Set button background color
         submit.setForeground(Color.WHITE);
         submit.addActionListener(this);
@@ -89,7 +89,7 @@ public class AddFakultas extends JFrame implements ActionListener {
         add(submit);
 
         cancel = new JButton("Cancel");
-        cancel.setBounds(450, 550, 120, 30);
+        cancel.setBounds(500, 400, 120, 30);
         cancel.setBackground(new Color(128, 0, 0)); // Set button background color
         cancel.setForeground(Color.WHITE);
         cancel.addActionListener(this);

@@ -25,12 +25,13 @@ public class AddStudent extends JFrame implements ActionListener {
 
     AddStudent() {
 
-        setSize(900, 700);
-        setLocation(350, 50);
+        setSize(900, 600);
+        setLocationRelativeTo(null);
+
 
         setLayout(null);
-
-        JLabel heading = new JLabel("Add New Student ");
+        getContentPane().setBackground(new Color(173, 216, 230)); // Set background color
+        JLabel heading = new JLabel("Tambah Mahasiswa Baru ");
         heading.setBounds(310, 30, 500, 50);
         heading.setFont(new Font("serif", Font.BOLD, 30));
         add(heading);
@@ -145,7 +146,7 @@ public class AddStudent extends JFrame implements ActionListener {
         cbfakultas.setBounds(200, 400, 150, 30);
         cbfakultas.setBackground(Color.WHITE);
 
-        // Add an ActionListener to cbfakultas to update cbprodi when a faculty is selected
+        // Memasukkan ActionListener ke cbfakultas untuk memperbarui cbprodi ketika fakultas dipilih
         cbfakultas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -171,16 +172,16 @@ public class AddStudent extends JFrame implements ActionListener {
         add(cbprodi);
 
         submit = new JButton("Submit");
-        submit.setBounds(250, 550, 120, 30);
-        submit.setBackground(Color.BLACK);
+        submit.setBounds(250, 500, 120, 30);
+        submit.setBackground(new Color(0, 128, 0)); // Set button background color
         submit.setForeground(Color.WHITE);
         submit.addActionListener(this);
         submit.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(submit);
 
         cancel = new JButton("Cancel");
-        cancel.setBounds(450, 550, 120, 30);
-        cancel.setBackground(Color.BLACK);
+        cancel.setBounds(450, 500, 120, 30);
+        cancel.setBackground(new Color(128, 0, 0)); // Set button background color
         cancel.setForeground(Color.WHITE);
         cancel.addActionListener(this);
         cancel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -189,7 +190,8 @@ public class AddStudent extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // UpdateProdiComboBox method to set the model for cbprodi
+    // selectProdiComboBox method to set the model for cbprodi
+    // Mengambil parameter dari selected fakultas untuk mengambil prodi yang sesuai
     private void selectProdiComboBox(String selectedFakultas) {
         try {
             // Query to retrieve "Prodi" values from the database based on the selected "Fakultas"
@@ -216,6 +218,7 @@ public class AddStudent extends JFrame implements ActionListener {
         }
     }
 
+    // selectFakultasComboBox method to set the model for cbfakultas
     private void selectFakultasComboBox() {
         try {
             // Query to retrieve "Prodi" values from the database

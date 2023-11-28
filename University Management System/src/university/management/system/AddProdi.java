@@ -23,9 +23,8 @@ public class AddProdi extends JFrame implements ActionListener {
 
     AddProdi() {
 
-        setSize(900, 700);
-        setLocation(350, 50);
-
+        setSize(900, 600);
+        setLocationRelativeTo(null);
         setLayout(null);
 
         getContentPane().setBackground(new Color(173, 216, 230)); // Set background color
@@ -133,7 +132,7 @@ public class AddProdi extends JFrame implements ActionListener {
 
 
         submit = new JButton("Submit");
-        submit.setBounds(250, 550, 120, 30);
+        submit.setBounds(250, 500, 120, 30);
         submit.setBackground(new Color(0, 128, 0)); // Set button background color
         submit.setForeground(Color.WHITE);
         submit.addActionListener(this);
@@ -141,7 +140,7 @@ public class AddProdi extends JFrame implements ActionListener {
         add(submit);
 
         cancel = new JButton("Cancel");
-        cancel.setBounds(450, 550, 120, 30);
+        cancel.setBounds(450, 500, 120, 30);
         cancel.setBackground(new Color(128, 0, 0)); // Set button background color
         cancel.setForeground(Color.WHITE);
         cancel.addActionListener(this);

@@ -13,6 +13,8 @@ public class Splash extends JFrame implements Runnable {
 
         // Create a panel to hold the image and progress bar
         JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(new Color(0, 128, 0));// Set the background color to green
+
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/usu.png"));
         Image i2 = i1.getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT);

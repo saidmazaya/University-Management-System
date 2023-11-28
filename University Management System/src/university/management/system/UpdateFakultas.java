@@ -19,10 +19,12 @@ public class UpdateFakultas extends JFrame implements ActionListener {
 
     UpdateFakultas() {
 
-        setSize(900, 650);
-        setLocation(350, 50);
+        setSize(900, 500);
+        setLocationRelativeTo(null);
 
         setLayout(null);
+
+        getContentPane().setBackground(new Color(173, 216, 230)); // Set background color
 
         JLabel heading = new JLabel("Update Faculty Details");
         heading.setBounds(50, 10, 500, 50);
@@ -115,16 +117,16 @@ public class UpdateFakultas extends JFrame implements ActionListener {
         });
 
         submit = new JButton("Update");
-        submit.setBounds(250, 500, 120, 30);
-        submit.setBackground(Color.BLACK);
+        submit.setBounds(300, 400, 120, 30);
+        submit.setBackground(new Color(0, 128, 0)); // Set button background color
         submit.setForeground(Color.WHITE);
         submit.addActionListener(this);
         submit.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(submit);
 
         cancel = new JButton("Cancel");
-        cancel.setBounds(450, 500, 120, 30);
-        cancel.setBackground(Color.BLACK);
+        cancel.setBounds(500, 400, 120, 30);
+        cancel.setBackground(new Color(128, 0, 0)); // Set button background color
         cancel.setForeground(Color.WHITE);
         cancel.addActionListener(this);
         cancel.setFont(new Font("Tahoma", Font.BOLD, 15));

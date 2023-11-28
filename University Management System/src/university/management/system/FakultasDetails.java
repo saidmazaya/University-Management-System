@@ -77,9 +77,10 @@ public class FakultasDetails extends JFrame implements ActionListener {
         cancel.addActionListener(this);
         add(cancel);
 
-        setSize(900, 700);
+        setSize(900, 600);
         setLocation(300, 100);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     public void actionPerformed(ActionEvent ae) {

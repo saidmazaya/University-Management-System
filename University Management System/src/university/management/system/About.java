@@ -7,15 +7,18 @@ public class About extends JFrame {
 
     About() {
         setSize(700, 500);
-        setLocation(400, 150);
+        setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/about.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(300, 200, Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/pbol1.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(300, 200, Image.SCALE_SMOOTH);
         ImageIcon i3 = new ImageIcon(i2);
+
+        // Adjust y-coordinate to create space from the top
         JLabel image = new JLabel(i3);
-        image.setBounds(350, 0, 300, 200);
+        image.setBounds(350, 20, 300, 200);
         add(image);
+
 
         JLabel heading = new JLabel("<html>University<br/>Management System</html>");
         heading.setBounds(70, 20, 300, 130);
