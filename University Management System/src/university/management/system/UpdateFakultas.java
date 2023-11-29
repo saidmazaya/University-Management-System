@@ -51,7 +51,7 @@ public class UpdateFakultas extends JFrame implements ActionListener {
         }
 
         JLabel lblname = new JLabel("Nama Fakultas");
-        lblname.setBounds(50, 150, 105, 30);
+        lblname.setBounds(50, 150, 130, 30);
         lblname.setFont(new Font("serif", Font.BOLD, 20));
         add(lblname);
 

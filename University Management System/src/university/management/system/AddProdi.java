@@ -31,7 +31,7 @@ public class AddProdi extends JFrame implements ActionListener {
 
 
         JLabel heading = new JLabel("Tambah Program Studi");
-        heading.setBounds(310, 30, 500, 50);
+        heading.setBounds(270, 30, 500, 50);
         heading.setFont(new Font("serif", Font.BOLD, 30));
         add(heading);
 
