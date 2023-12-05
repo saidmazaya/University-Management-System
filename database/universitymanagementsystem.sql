@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2023 at 05:55 PM
+-- Generation Time: Dec 05, 2023 at 06:11 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `universitymanagementsystem`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dosen`
+--
+
+CREATE TABLE `dosen` (
+  `nip` int(15) NOT NULL,
+  `nama` varchar(40) DEFAULT NULL,
+  `gender` varchar(40) DEFAULT NULL,
+  `tgl_lahir` date DEFAULT NULL,
+  `alamat` varchar(100) DEFAULT NULL,
+  `no_hp` varchar(20) DEFAULT NULL,
+  `email` varchar(40) DEFAULT NULL,
+  `prodi` varchar(20) DEFAULT NULL,
+  `fakultas` varchar(20) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `kategori` varchar(50) DEFAULT NULL,
+  `tahun_masuk` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dosen`
+--
+
+INSERT INTO `dosen` (`nip`, `nama`, `gender`, `tgl_lahir`, `alamat`, `no_hp`, `email`, `prodi`, `fakultas`, `status`, `kategori`, `tahun_masuk`) VALUES
+(204508300, 'Tess', 'Perempuan', '2023-12-06', 'sadsaup', '21321321323', 'sdasa@gmaildate', 'Teknik Sastra', 'Teknik', 'Rector', 'Non Disabilities', 91022),
+(205529883, 'Orang', 'Laki-laki', '2023-12-11', 'dfasdfsad', '213123', 'dfafs@udsffa', 'Teknologi Informasi', 'Fasilkom-TI', 'Senior Lecturer', 'Non Disabilities', 2000);
 
 -- --------------------------------------------------------
 
@@ -42,6 +71,8 @@ CREATE TABLE `fakultas` (
 INSERT INTO `fakultas` (`id_fakultas`, `nama_fakultas`, `email`, `alamat`, `tanggal_berdiri`) VALUES
 (101961, 'Fasilkom-TI', 'fasilkom@usu.ac.id', 'dr. mansyur', '2023-11-04'),
 (1014780, 'Teknik', 'teknik@usu.ac.id', 'padang bintang, saturnus', '0001-02-02'),
+(1018198, 'FIBA', 'fib@usu.ac.idd', 'Jl Dr. Mansyur 89', '2023-12-05'),
+(1019732, 'Fakultas Pertanian', 'pertanianusu@gmail.com', 'Jl Dr mansyur', '2023-11-09'),
 (1019997, 'FK', 'fk@usu.ac.id', 'usuu', '0001-01-01');
 
 -- --------------------------------------------------------
@@ -89,6 +120,8 @@ INSERT INTO `prodi` (`nama_prodi`, `nama_fakultas`, `email`, `id_prodi`, `tangga
 ('Teknik Sastra', 'Teknik', 'ts@usu.ac.id', '1011599', '0002-11-03', 'johor, jamin ginting', 5, 5000, 191, 'S-3'),
 ('Teknologi Informasi', 'Fasilkom-TI', 'ti@usu.ac.id', '1012368', '2023-11-14', 'usu', 2133, 3213, 1234, 'S-1'),
 ('Ilmu Komputer', 'Fasilkom-TI', 'fsad@usu', '1012620', '2023-11-15', 'usu', 321, 123, 321, 'S-1'),
+('Sastra Informatika', 'FIB', 'si@usu.ac.id', '1012835', '2023-12-06', 'Johor', 87, 23, 98, 'S-1'),
+('Tes', 'FK', 'dsa@gmail', '1013931', '2023-12-06', 'dsa', 324, 432, 24233, 'S-1'),
 ('Teknik Kedokteran', 'FK', 'tkked@usu.ac.id', '101481', '2023-11-15', 'dr. mansyur', 342, 432, 1345, 'S-1'),
 ('Pendidikan Dokter', 'FK', 'pd@usu.ac.id', '1018195', '2023-11-16', 'usu', 124, 421, 213, 'S-1');
 
@@ -119,6 +152,7 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`nama`, `gender`, `nim`, `tgl_lahir`, `alamat`, `no_hp`, `email`, `prodi`, `fakultas`, `status`, `kategori`, `tahun_masuk`) VALUES
 ('Aul', 'Perempuan', 202797, '2050-11-03', 'Teladan', '01111111222', 'asahan@gmail.com', 'Teknik Sastra', 'Teknik', 'Drop Out', 'Non Disabilities', 3000),
+('Said Mazaya', 'Laki-laki', 204597, '2023-12-05', 'AH Nasution', '0819231234', 'said@usu.ac.id', 'Sastra Informatika', 'FIB', 'New Student', 'Non Disabilities', 2080),
 ('Tes', 'Laki-laki', 204933, '2023-11-07', 'dfsdsfads', '5434532', 'fsdadsfdfs', 'Teknik Kedokteran', 'FK', 'New Student', 'Non Disabilities', 342342),
 ('Update', 'Laki-laki', 205126, '2023-11-20', 'dsadas', 'dsasad', 'dsasa', 'Teknologi Informasi', 'Fasilkom-TI', 'New Student', 'Non Disabilities', 213),
 ('dasdsa', 'Perempuan', 206161, '2023-11-08', 'baru', '3248334', 'baru@usu', 'Ilmu Komputer', 'Fasilkom-TI', 'Drop Out', 'Disabilities', 432123),
@@ -127,6 +161,12 @@ INSERT INTO `student` (`nama`, `gender`, `nim`, `tgl_lahir`, `alamat`, `no_hp`, 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `dosen`
+--
+ALTER TABLE `dosen`
+  ADD PRIMARY KEY (`nip`);
 
 --
 -- Indexes for table `fakultas`

@@ -12,7 +12,7 @@ public class ProdiDetails extends JFrame implements ActionListener {
 
     Choice lblprodId;
     JTable table;
-    JButton search, print, update, add, cancel;
+    JButton search, print, update, add, cancel, preview;
 
     ProdiDetails() {
 
@@ -72,6 +72,11 @@ public class ProdiDetails extends JFrame implements ActionListener {
         update.addActionListener(this);
         add(update);
 
+        preview = new JButton("Preview");
+        preview.setBounds(520, 70, 90, 20);
+        preview.addActionListener(this);
+        add(preview);
+
         cancel = new JButton("Cancel");
         cancel.setBounds(420, 70, 80, 20);
         cancel.addActionListener(this);
@@ -119,7 +124,10 @@ public class ProdiDetails extends JFrame implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (ae.getSource() == add) {
+        } else if (ae.getSource() == preview) {
+            // Display a preview window or dialog
+            new PreviewDialog(this, table.getModel());
+        }  else if (ae.getSource() == add) {
             setVisible(false);
             new AddProdi();
         } else if (ae.getSource() == update) {

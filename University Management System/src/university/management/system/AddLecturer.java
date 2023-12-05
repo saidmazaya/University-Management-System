@@ -11,13 +11,13 @@ import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.*;
 
-// Deklarasi kelas AddStudent yang meng-extend JFrame dan meng-implement ActionListener
-public class AddStudent extends JFrame implements ActionListener {
+// Deklarasi kelas AddLecturer yang meng-extend JFrame dan meng-implement ActionListener
+public class AddLecturer extends JFrame implements ActionListener {
 
     // Deklarasi variabel-variabel yang akan digunakan
     JTextField tfnama, tfemail, tfalamat, tfnohp, tahunMasuk;
 
-    JLabel lbnim;
+    JLabel lbnip;
     JDateChooser dcdob;
     JComboBox cbfakultas, cbprodi, cbstatus, cbcategory;
     JComboBox<String> genderComboBox;
@@ -25,10 +25,10 @@ public class AddStudent extends JFrame implements ActionListener {
 
     // Membuat objek Random untuk meng-generate NIM secara acak
     Random ran = new Random();
-    long first4 = Math.abs((ran.nextLong() % 9000L) + 1000L);
+    long first4 = Math.abs((ran.nextLong() % 9000000L) + 1000000L);
 
-    // Konstruktor kelas AddStudent
-    AddStudent() {
+    // Konstruktor kelas AddLecturer
+    AddLecturer() {
 
         // Mengatur ukuran dan lokasi frame
         setSize(900, 600);
@@ -38,7 +38,7 @@ public class AddStudent extends JFrame implements ActionListener {
         setLayout(null);
         // Mengatur warna latar belakang
         getContentPane().setBackground(new Color(173, 216, 230));
-        JLabel heading = new JLabel("Tambah Mahasiswa Baru ");
+        JLabel heading = new JLabel("Tambah Dosen Baru ");
         heading.setBounds(260, 30, 500, 50);
         heading.setFont(new Font("serif", Font.BOLD, 30));
         add(heading);
@@ -64,14 +64,14 @@ public class AddStudent extends JFrame implements ActionListener {
         add(genderComboBox);
 
         // Menambahkan label dan nilai NIM
-        JLabel lblnim = new JLabel("NIM");
-        lblnim.setBounds(50, 200, 200, 30);
-        lblnim.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblnim);
-        lbnim = new JLabel("20" + first4);
-        lbnim.setBounds(200, 200, 200, 30);
-        lbnim.setFont(new Font("serif", Font.BOLD, 20));
-        add(lbnim);
+        JLabel lblnip = new JLabel("NIP");
+        lblnip.setBounds(50, 200, 200, 30);
+        lblnip.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblnip);
+        lbnip = new JLabel("20" + first4);
+        lbnip.setBounds(200, 200, 200, 30);
+        lbnip.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbnip);
 
         // Menambahkan label dan date chooser untuk Tanggal Lahir
         JLabel lbldob = new JLabel("Tanggal Lahir");
@@ -114,7 +114,7 @@ public class AddStudent extends JFrame implements ActionListener {
         lblstatus.setBounds(400, 300, 200, 30);
         lblstatus.setFont(new Font("serif", Font.BOLD, 20));
         add(lblstatus);
-        String status[] = {"New Student", "Exchanged Student", "Reback Student"};
+        String status[] = {"Junior Lecturer", "Lecturer", "Senior Lecturer", "Head of Department", "Dean", "Rector"};
         cbstatus = new JComboBox(status);
         cbstatus.setBounds(600, 300, 150, 30);
         cbstatus.setFont(new Font("serif", Font.BOLD, 15));
@@ -257,7 +257,7 @@ public class AddStudent extends JFrame implements ActionListener {
             // Mengambil nilai dari field input
             String nama = tfnama.getText();
             String gender = (String) genderComboBox.getSelectedItem();
-            String nim = lbnim.getText();
+            String nip = lbnip.getText();
             Date selectedDate = dcdob.getDate();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String tgl_lahir = dateFormat.format(selectedDate);
@@ -272,13 +272,13 @@ public class AddStudent extends JFrame implements ActionListener {
 
             try {
                 // Query SQL untuk menyimpan data mahasiswa ke database
-                String query = "insert into student values('" + nama + "', '" + gender + "', '" + nim + "', '" + tgl_lahir + "', '" + alamat + "', '" + no_hp + "', '" + email + "', '" + prodi + "', '" + fakultas + "', '" + status + "', '" + kategori + "', '" + tahun_masuk + "')";
+                String query = "insert into dosen values('" + nip + "', '" + nama + "', '" + gender + "', '" + tgl_lahir + "', '" + alamat + "', '" + no_hp + "', '" + email + "', '" + prodi + "', '" + fakultas + "', '" + status + "', '" + kategori + "', '" + tahun_masuk + "')";
 
                 Conn con = new Conn();
                 con.s.executeUpdate(query);
 
                 // Menampilkan pesan sukses dan menutup frame
-                JOptionPane.showMessageDialog(null, "Student Details Inserted Successfully");
+                JOptionPane.showMessageDialog(null, "Lecturer Details Inserted Successfully");
                 setVisible(false);
             } catch (Exception e) {
                 e.printStackTrace();

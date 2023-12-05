@@ -38,6 +38,11 @@ public class Project extends JFrame implements ActionListener {
         studentInfo.addActionListener(this);
         newInformation.add(studentInfo);
 
+        JMenuItem lecturerInfo = new JMenuItem("Add New Lecturer");
+        lecturerInfo.setBackground(Color.WHITE);
+        lecturerInfo.addActionListener(this);
+        newInformation.add(lecturerInfo);
+
         // Details
         JMenu details = new JMenu("View Details");
         details.setForeground(Color.RED);
@@ -58,6 +63,11 @@ public class Project extends JFrame implements ActionListener {
         studentdetails.addActionListener(this);
         details.add(studentdetails);
 
+        JMenuItem lecturerdetails = new JMenuItem("View Lecturer Details");
+        lecturerdetails.setBackground(Color.WHITE);
+        lecturerdetails.addActionListener(this);
+        details.add(lecturerdetails);
+
         // UpdateInfo
         JMenu updateInfo = new JMenu("Update Details");
         updateInfo.setForeground(Color.RED);
@@ -77,6 +87,11 @@ public class Project extends JFrame implements ActionListener {
         updatestudentinfo.setBackground(Color.WHITE);
         updatestudentinfo.addActionListener(this);
         updateInfo.add(updatestudentinfo);
+
+        JMenuItem updatelecturerinfo = new JMenuItem("Update Lecturer Details");
+        updatelecturerinfo.setBackground(Color.WHITE);
+        updatelecturerinfo.addActionListener(this);
+        updateInfo.add(updatelecturerinfo);
 
         // UpdateInfo
         JMenu aboutInfo = new JMenu("About");
@@ -114,18 +129,24 @@ public class Project extends JFrame implements ActionListener {
             new AddProdi();
         } else if (msg.equals("Add New Student")) {
             new AddStudent();
+        }  else if (msg.equals("Add New Lecturer")) {
+            new AddLecturer();
         } else if (msg.equals("View Faculty Details")) {
             new FakultasDetails();
         } else if (msg.equals("View Prodi Details")) {
             new ProdiDetails();
         } else if (msg.equals("View Student Details")) {
             new StudentDetails();
+        } else if (msg.equals("View Lecturer Details")) {
+            new LecturerDetails();
         } else if (msg.equals("Update Faculty Details")) {
             new UpdateFakultas();
         } else if (msg.equals("Update Prodi Details")) {
             new UpdateProdi();
         } else if (msg.equals("Update Student Details")) {
             new UpdateStudent();
+        } else if (msg.equals("Update Lecturer Details")) {
+            new UpdateLecturer();
         } else if (msg.equals("About")) {
             new About();
         }

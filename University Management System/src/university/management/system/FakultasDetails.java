@@ -1,6 +1,7 @@
 package university.management.system;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.sql.*;
 
@@ -12,7 +13,7 @@ public class FakultasDetails extends JFrame implements ActionListener {
 
     Choice lblFakId;
     JTable table;
-    JButton search, print, update, add, cancel;
+    JButton search, print, update, add, cancel, preview;
 
     FakultasDetails() {
 
@@ -61,6 +62,11 @@ public class FakultasDetails extends JFrame implements ActionListener {
         print.setBounds(120, 70, 80, 20);
         print.addActionListener(this);
         add(print);
+
+        preview = new JButton("Preview");
+        preview.setBounds(520, 70, 90, 20);
+        preview.addActionListener(this);
+        add(preview);
 
         add = new JButton("Add");
         add.setBounds(220, 70, 80, 20);
@@ -119,13 +125,16 @@ public class FakultasDetails extends JFrame implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (ae.getSource() == preview) {
+            // Display a preview window or dialog
+            new PreviewDialog(this, table.getModel());
         } else if (ae.getSource() == add) {
             setVisible(false);
             new AddFakultas();
         } else if (ae.getSource() == update) {
             setVisible(false);
             new UpdateFakultas();
-        } else {
+        }  else {
             setVisible(false);
         }
     }

@@ -8,31 +8,31 @@ import net.proteanit.sql.DbUtils;
 
 import java.awt.event.*;
 
-public class StudentDetails extends JFrame implements ActionListener {
+public class LecturerDetails extends JFrame implements ActionListener {
 
-    Choice lbnim;
+    Choice lbnip;
     JTable table;
     JButton search, print, update, add, cancel, preview;
 
-    StudentDetails() {
+    LecturerDetails() {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
-        JLabel heading = new JLabel("Search by NIM");
+        JLabel heading = new JLabel("Search by NIP");
         heading.setBounds(20, 20, 150, 20);
         add(heading);
 
-        lbnim = new Choice();
-        lbnim.setBounds(180, 20, 150, 20);
-        lbnim.insert("Semua Data", 0);
-        add(lbnim);
+        lbnip = new Choice();
+        lbnip.setBounds(180, 20, 150, 20);
+        lbnip.insert("Semua Data", 0);
+        add(lbnip);
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from student");
+            ResultSet rs = c.s.executeQuery("select * from dosen");
             while (rs.next()) {
-                lbnim.add(rs.getString("nim"));
+                lbnip.add(rs.getString("nip"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class StudentDetails extends JFrame implements ActionListener {
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from student");
+            ResultSet rs = c.s.executeQuery("select * from dosen");
             table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,27 +90,27 @@ public class StudentDetails extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-            String selectedNim = lbnim.getSelectedItem();
+            String selectedNip = lbnip.getSelectedItem();
 
-            if ("Semua Data".equals(selectedNim)) {
-                // Show all data without considering nim
+            if ("Semua Data".equals(selectedNip)) {
+                // Show all data without considering nip
                 try {
                     Conn c = new Conn();
-                    ResultSet rs = c.s.executeQuery("select * from student");
+                    ResultSet rs = c.s.executeQuery("select * from dosen");
                     table.setModel(DbUtils.resultSetToTableModel(rs));
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else {
-                // Search by the selected nim
-                String query = "select * from student where nim = '" + selectedNim + "'";
+                // Search by the selected nip
+                String query = "select * from dosen where nip = '" + selectedNip + "'";
                 try {
                     Conn c = new Conn();
                     ResultSet rs = c.s.executeQuery(query);
                     table.setModel(DbUtils.resultSetToTableModel(rs));
 
-                    // Show Add, Update, Print buttons when a specific nim is selected
+                    // Show Add, Update, Print buttons when a specific nip is selected
                     add.setVisible(true);
                     update.setVisible(true);
                     print.setVisible(true);

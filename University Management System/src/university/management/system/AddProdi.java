@@ -189,12 +189,15 @@ public class AddProdi extends JFrame implements ActionListener {
             String jenjang = (String) cbjenjang.getSelectedItem();
 
             try {
-                String query = "insert into prodi values('" + nama_prodi + "', '" + nama_fakultas + "', '" + email + "', '" + id_prodi + "', '" + tanggal_berdiri + "', '" + alamat + "', '" + mahasiswa_aktif + "', '" + jumlah_dosen + "', '" + jumlah_staff + "','" + jenjang + "')";
+                // Construct and execute the insertion query
+                String query = "insert into prodi values('" + nama_prodi + "', '" + nama_fakultas + "', '"
+                        + email + "', '" + id_prodi + "', '" + tanggal_berdiri + "', '" + alamat + "', '"
+                        + mahasiswa_aktif + "', '" + jumlah_dosen + "', '" + jumlah_staff + "','" + jenjang + "')";
 
                 Conn con = new Conn();
                 con.s.executeUpdate(query);
 
-                JOptionPane.showMessageDialog(null, "Prodi Baru Berhasil Di tambahkan");
+                JOptionPane.showMessageDialog(null, "Prodi Baru Berhasil Ditambahkan");
                 setVisible(false);
             } catch (Exception e) {
                 e.printStackTrace();

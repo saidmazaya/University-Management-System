@@ -8,16 +8,16 @@ import java.awt.event.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
-public class UpdateStudent extends JFrame implements ActionListener {
+public class UpdateLecturer extends JFrame implements ActionListener {
 
     JTextField tfnama, tfemail, tfalamat, tfnohp, tahunMasuk;
-    JLabel lbnim;
+    JLabel lbnip;
     JDateChooser dcdob;
     JComboBox cbfakultas, cbprodi, cbstatus, cbcategory, cbgender;
     JButton submit, cancel;
-    Choice nim;
+    Choice nip;
 
-    UpdateStudent() {
+    UpdateLecturer() {
 
         setSize(900, 650);
         setLocationRelativeTo(null);
@@ -26,25 +26,25 @@ public class UpdateStudent extends JFrame implements ActionListener {
 
         getContentPane().setBackground(new Color(173, 216, 230)); // Set background color
 
-        JLabel heading = new JLabel("Update Student Details");
+        JLabel heading = new JLabel("Update Lecturer Details");
         heading.setBounds(50, 10, 500, 50);
         heading.setFont(new Font("Tahoma", Font.ITALIC, 35));
         add(heading);
 
-        JLabel lblselnim = new JLabel("Select NIM");
-        lblselnim.setBounds(50, 100, 200, 20);
-        lblselnim.setFont(new Font("serif", Font.PLAIN, 20));
-        add(lblselnim);
+        JLabel lblselnip = new JLabel("Select NIP");
+        lblselnip.setBounds(50, 100, 200, 20);
+        lblselnip.setFont(new Font("serif", Font.PLAIN, 20));
+        add(lblselnip);
 
-        nim = new Choice();
-        nim.setBounds(250, 100, 200, 20);
-        add(nim);
+        nip = new Choice();
+        nip.setBounds(250, 100, 200, 20);
+        add(nip);
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from student");
+            ResultSet rs = c.s.executeQuery("select * from dosen");
             while (rs.next()) {
-                nim.add(rs.getString("nim"));
+                nip.add(rs.getString("nip"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,15 +70,15 @@ public class UpdateStudent extends JFrame implements ActionListener {
         cbgender.setBackground(Color.WHITE);
         add(cbgender);
 
-        JLabel lblnim = new JLabel("NIM");
-        lblnim.setBounds(50, 200, 200, 30);
-        lblnim.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblnim);
+        JLabel lblnip = new JLabel("NIP");
+        lblnip.setBounds(50, 200, 200, 30);
+        lblnip.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblnip);
 
-        lbnim = new JLabel();  // Remove the initial text
-        lbnim.setBounds(200, 200, 200, 30);
-        lbnim.setFont(new Font("serif", Font.BOLD, 20));
-        add(lbnim);
+        lbnip = new JLabel();  // Remove the initial text
+        lbnip.setBounds(200, 200, 200, 30);
+        lbnip.setFont(new Font("serif", Font.BOLD, 20));
+        add(lbnip);
 
         JLabel lbldob = new JLabel("Tanggal Lahir");
         lbldob.setBounds(400, 200, 200, 30);
@@ -121,7 +121,7 @@ public class UpdateStudent extends JFrame implements ActionListener {
         lblsts.setFont(new Font("serif", Font.BOLD, 20));
         add(lblsts);
 
-        String status[] = {"New Student", "Exchanged Student", "Reback Student", "Drop Out", "Graduated"};
+        String status[] = {"Junior Lecturer", "Lecturer", "Senior Lecturer", "Head of Department", "Dean", "Rector"};
         cbstatus = new JComboBox(status);
         cbstatus.setBounds(600, 300, 150, 30);
         cbstatus.setFont(new Font("serif", Font.BOLD, 15));
@@ -187,13 +187,13 @@ public class UpdateStudent extends JFrame implements ActionListener {
         try {
             Conn con = new Conn();
             Connection connection = con.c;
-            nim.addItemListener(new ItemListener() {
+            nip.addItemListener(new ItemListener() {
                 public void itemStateChanged(ItemEvent ie) {
                     try {
-                        String selectedNim = nim.getSelectedItem();
-                        String query = "select * from student where nim=?";
+                        String selectedNip = nip.getSelectedItem();
+                        String query = "select * from dosen where nip=?";
                         PreparedStatement pstmt = connection.prepareStatement(query);
-                        pstmt.setString(1, selectedNim);
+                        pstmt.setString(1, selectedNip);
                         ResultSet rs = pstmt.executeQuery();
 
                         while (rs.next()) {
@@ -213,17 +213,17 @@ public class UpdateStudent extends JFrame implements ActionListener {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (ie.getSource() == nim) {
+                    if (ie.getSource() == nip) {
                         try {
-                            String selectedNIM = nim.getSelectedItem();
+                            String selectedNIP = nip.getSelectedItem();
 
-                            // Assuming you have a query to get the corresponding NIM from the database
+                            // Assuming you have a query to get the corresponding NIP from the database
                             Conn c = new Conn();
-                            ResultSet rs = c.s.executeQuery("select * from student where nim='" + selectedNIM + "'");
+                            ResultSet rs = c.s.executeQuery("select * from dosen where nip='" + selectedNIP + "'");
 
                             if (rs.next()) {
-                                String nimValue = rs.getString("nim");
-                                lbnim.setText(nimValue);
+                                String nipValue = rs.getString("nip");
+                                lbnip.setText(nipValue);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -306,7 +306,7 @@ public class UpdateStudent extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == submit) {
-            String nimValue = nim.getSelectedItem(); // Assuming nim is your NIM Choice
+            String nipValue = nip.getSelectedItem(); // Assuming nip is your NIP Choice
             String nama = tfnama.getText();
             String gender = (String) cbgender.getSelectedItem();
             java.sql.Date selectedDate = new java.sql.Date(dcdob.getDate().getTime());
@@ -322,7 +322,7 @@ public class UpdateStudent extends JFrame implements ActionListener {
             String tahun_masuk = tahunMasuk.getText();
 
             try {
-                String query = "UPDATE student SET nama=?, gender=?, tgl_lahir=?, alamat=?, no_hp=?, email=?, prodi=?, fakultas=?, status=?, kategori=?, tahun_masuk=? WHERE nim=?";
+                String query = "UPDATE dosen SET nama=?, gender=?, tgl_lahir=?, alamat=?, no_hp=?, email=?, prodi=?, fakultas=?, status=?, kategori=?, tahun_masuk=? WHERE nip=?";
                 Conn con = new Conn();
                 Connection connection = con.c;
                 PreparedStatement pstmt = connection.prepareStatement(query);
@@ -338,11 +338,11 @@ public class UpdateStudent extends JFrame implements ActionListener {
                 pstmt.setString(9, status);
                 pstmt.setString(10, kategori);
                 pstmt.setString(11, tahun_masuk);
-                pstmt.setString(12, nimValue);
+                pstmt.setString(12, nipValue);
 
                 pstmt.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Student Details Updated Successfully");
+                JOptionPane.showMessageDialog(null, "Lecturer Details Updated Successfully");
                 setVisible(false);
             } catch (Exception e) {
                 e.printStackTrace();
