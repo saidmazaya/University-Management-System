@@ -353,6 +353,6 @@ public class UpdateStudent extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new UpdateLecturer();
+        new UpdateStudent();
     }
 }

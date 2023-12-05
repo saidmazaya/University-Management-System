@@ -129,7 +129,7 @@ public class ProdiDetails extends JFrame implements ActionListener {
             new PreviewDialog(this, table.getModel());
         }  else if (ae.getSource() == add) {
             setVisible(false);
-            new AddProdi();
+            new AddSubject();
         } else if (ae.getSource() == update) {
             setVisible(false);
             new UpdateProdi();

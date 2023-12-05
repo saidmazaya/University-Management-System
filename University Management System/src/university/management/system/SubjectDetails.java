@@ -8,31 +8,31 @@ import net.proteanit.sql.DbUtils;
 
 import java.awt.event.*;
 
-public class StudentDetails extends JFrame implements ActionListener {
+public class SubjectDetails extends JFrame implements ActionListener {
 
-    Choice lbnim;
+    Choice lblidmatkul;
     JTable table;
     JButton search, print, update, add, cancel, preview;
 
-    StudentDetails() {
+    SubjectDetails() {
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
-        JLabel heading = new JLabel("Search by NIM");
+        JLabel heading = new JLabel("Search by ID");
         heading.setBounds(20, 20, 150, 20);
         add(heading);
 
-        lbnim = new Choice();
-        lbnim.setBounds(180, 20, 150, 20);
-        lbnim.insert("Semua Data", 0);
-        add(lbnim);
+        lblidmatkul = new Choice();
+        lblidmatkul.setBounds(180, 20, 150, 20);
+        lblidmatkul.insert("Semua Data", 0);
+        add(lblidmatkul);
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from student");
+            ResultSet rs = c.s.executeQuery("select * from subject");
             while (rs.next()) {
-                lbnim.add(rs.getString("nim"));
+                lblidmatkul.add(rs.getString("id"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class StudentDetails extends JFrame implements ActionListener {
 
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from student");
+            ResultSet rs = c.s.executeQuery("select * from subject");
             table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,13 +90,13 @@ public class StudentDetails extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-            String selectedNim = lbnim.getSelectedItem();
+            String selectedIdMatkul = lblidmatkul.getSelectedItem();
 
-            if ("Semua Data".equals(selectedNim)) {
+            if ("Semua Data".equals(selectedIdMatkul)) {
                 // Show all data without considering nim
                 try {
                     Conn c = new Conn();
-                    ResultSet rs = c.s.executeQuery("select * from student");
+                    ResultSet rs = c.s.executeQuery("select * from subject");
                     table.setModel(DbUtils.resultSetToTableModel(rs));
 
                 } catch (Exception e) {
@@ -104,7 +104,7 @@ public class StudentDetails extends JFrame implements ActionListener {
                 }
             } else {
                 // Search by the selected nim
-                String query = "select * from student where nim = '" + selectedNim + "'";
+                String query = "select * from subject where id = '" + selectedIdMatkul + "'";
                 try {
                     Conn c = new Conn();
                     ResultSet rs = c.s.executeQuery(query);
@@ -140,6 +140,6 @@ public class StudentDetails extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new StudentDetails();
+        new SubjectDetails();
     }
 }

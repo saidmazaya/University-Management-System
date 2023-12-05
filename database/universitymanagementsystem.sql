@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2023 at 06:11 AM
+-- Generation Time: Dec 05, 2023 at 05:44 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -78,6 +78,36 @@ INSERT INTO `fakultas` (`id_fakultas`, `nama_fakultas`, `email`, `alamat`, `tang
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fee`
+--
+
+CREATE TABLE `fee` (
+  `nim` int(9) NOT NULL,
+  `jumlah_pembayaran` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `semester` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fee`
+--
+
+INSERT INTO `fee` (`nim`, `jumlah_pembayaran`, `status`, `semester`) VALUES
+(202797, '300000000', 'Belum Bayar', '1'),
+(205126, '931493598031289053890', 'Lunas', '5'),
+(205126, '2321312321312', 'Lunas', '4'),
+(202797, '2000000', 'Belum Lunas', '3'),
+(202797, '200000', 'Belum Lunas', '1'),
+(202797, '200000', 'Belum Bayar', '1'),
+(202797, '231123', 'Belum Bayar', '1'),
+(202797, '231123', 'Belum Bayar', '1'),
+(202797, '30000000', 'Lunas', '1'),
+(202797, '20000000', 'Belum Lunas', '1'),
+(202797, '20000000', 'Belum Lunas', '1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login`
 --
 
@@ -92,6 +122,25 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`username`, `password`) VALUES
 ('admin', '12345');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `major_fee`
+--
+
+CREATE TABLE `major_fee` (
+  `nama_prodi` varchar(100) DEFAULT NULL,
+  `ukt` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `major_fee`
+--
+
+INSERT INTO `major_fee` (`nama_prodi`, `ukt`) VALUES
+('Teknologi Informasi', '80000000'),
+('Teknik Sastra', '30000000');
 
 -- --------------------------------------------------------
 
@@ -158,6 +207,27 @@ INSERT INTO `student` (`nama`, `gender`, `nim`, `tgl_lahir`, `alamat`, `no_hp`, 
 ('dasdsa', 'Perempuan', 206161, '2023-11-08', 'baru', '3248334', 'baru@usu', 'Ilmu Komputer', 'Fasilkom-TI', 'Drop Out', 'Disabilities', 432123),
 ('Apaa', 'Laki-laki', 209750, '2023-11-15', 'dsfadsaf', '4132', 'dfsadsa', 'Ilmu Komputer', 'Fasilkom-TI', 'New Student', 'Non Disabilities', 23132);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject`
+--
+
+CREATE TABLE `subject` (
+  `id` int(11) NOT NULL,
+  `nama_matkul` varchar(100) DEFAULT NULL,
+  `semester` int(11) DEFAULT NULL,
+  `nama_prodi` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`id`, `nama_matkul`, `semester`, `nama_prodi`) VALUES
+(1011954, 'MSBD', 3, 'Teknologi Informasi'),
+(10921321, 'PBOLup', 3, 'Teknologi Informasi');
+
 --
 -- Indexes for dumped tables
 --
@@ -185,6 +255,12 @@ ALTER TABLE `prodi`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`nim`);
+
+--
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

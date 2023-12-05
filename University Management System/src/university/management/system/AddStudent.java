@@ -291,6 +291,6 @@ public class AddStudent extends JFrame implements ActionListener {
 
     // Metode main untuk menjalankan program
     public static void main(String[] args) {
-        new AddLecturer();
+        new AddStudent();
     }
 }
