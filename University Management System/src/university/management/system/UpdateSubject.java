@@ -24,7 +24,7 @@ public class UpdateSubject extends JFrame implements ActionListener {
 
         getContentPane().setBackground(new Color(173, 216, 230)); // Set background color
 
-        JLabel heading = new JLabel("Update LSubject");
+        JLabel heading = new JLabel("Update Subject");
         heading.setBounds(50, 10, 500, 50);
         heading.setFont(new Font("Tahoma", Font.ITALIC, 35));
         add(heading);
@@ -187,6 +187,27 @@ public class UpdateSubject extends JFrame implements ActionListener {
         cancel.addActionListener(this);
         cancel.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(cancel);
+
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Load the background image
+                ImageIcon backgroundImage = new ImageIcon(ClassLoader.getSystemResource("images/background.jpg"));
+                Image img = backgroundImage.getImage();
+                // Draw the background image
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
+
+        // Set the layout manager for the backgroundPanel to null
+        backgroundPanel.setLayout(null);
+
+        // Set the bounds of the backgroundPanel
+        backgroundPanel.setBounds(0, 0, 900, 660);
+
+        // Add the backgroundPanel to the content pane
+        add(backgroundPanel);
 
         setVisible(true);
     }

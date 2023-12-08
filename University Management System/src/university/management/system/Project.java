@@ -10,7 +10,7 @@ public class Project extends JFrame implements ActionListener {
         setSize(1000, 550);
         setLocationRelativeTo(null);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/1.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/1.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1000, 550, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
@@ -70,7 +70,7 @@ public class Project extends JFrame implements ActionListener {
 
         // UpdateInfo
         JMenu updateInfo = new JMenu("Update Details");
-        updateInfo.setForeground(Color.RED);
+        updateInfo.setForeground(Color.ORANGE);
         mb.add(updateInfo);
 
         JMenuItem updatefacultyinfo = new JMenuItem("Update Faculty Details");
@@ -93,9 +93,49 @@ public class Project extends JFrame implements ActionListener {
         updatelecturerinfo.addActionListener(this);
         updateInfo.add(updatelecturerinfo);
 
+        // Subject
+        JMenu subject = new JMenu("View Subject");
+        subject.setForeground(Color.CYAN);
+        mb.add(subject);
+
+        JMenuItem addsubjectinfo = new JMenuItem("Add New Subject");
+        addsubjectinfo.setBackground(Color.WHITE);
+        addsubjectinfo.addActionListener(this);
+        subject.add(addsubjectinfo);
+
+        JMenuItem detailsubjectinfo = new JMenuItem("View Subject Details");
+        detailsubjectinfo.setBackground(Color.WHITE);
+        detailsubjectinfo.addActionListener(this);
+        subject.add(detailsubjectinfo);
+
+        JMenuItem updatesubjectinfo = new JMenuItem("Update Subject Details");
+        updatesubjectinfo.setBackground(Color.WHITE);
+        updatesubjectinfo.addActionListener(this);
+        subject.add(updatesubjectinfo);
+
+        // Fee
+        JMenu feeInfo = new JMenu("Fee");
+        feeInfo.setForeground(Color.MAGENTA);
+        mb.add(feeInfo);
+
+        JMenuItem getFee = new JMenuItem("Fee Form");
+        getFee.setForeground(Color.BLACK);
+        getFee.addActionListener(this);
+        feeInfo.add(getFee);
+
+        JMenuItem structurFee = new JMenuItem("Fee Structure");
+        structurFee.setForeground(Color.BLACK);
+        structurFee.addActionListener(this);
+        feeInfo.add(structurFee);
+
+        JMenuItem detailFee = new JMenuItem("Fee Details");
+        detailFee.setForeground(Color.BLACK);
+        detailFee.addActionListener(this);
+        feeInfo.add(detailFee);
+
         // UpdateInfo
         JMenu aboutInfo = new JMenu("About");
-        aboutInfo.setForeground(Color.BLUE);
+        aboutInfo.setForeground(Color.BLACK);
         mb.add(aboutInfo);
 
         JMenuItem about = new JMenuItem("About");
@@ -131,7 +171,9 @@ public class Project extends JFrame implements ActionListener {
             new AddStudent();
         }  else if (msg.equals("Add New Lecturer")) {
             new AddLecturer();
-        } else if (msg.equals("View Faculty Details")) {
+        }  else if (msg.equals("Add New Subject")) {
+            new AddSubject();
+        }  else if (msg.equals("View Faculty Details")) {
             new FakultasDetails();
         } else if (msg.equals("View Prodi Details")) {
             new ProdiDetails();
@@ -139,6 +181,8 @@ public class Project extends JFrame implements ActionListener {
             new StudentDetails();
         } else if (msg.equals("View Lecturer Details")) {
             new LecturerDetails();
+        } else if (msg.equals("View Subject Details")) {
+            new SubjectDetails();
         } else if (msg.equals("Update Faculty Details")) {
             new UpdateFakultas();
         } else if (msg.equals("Update Prodi Details")) {
@@ -147,6 +191,14 @@ public class Project extends JFrame implements ActionListener {
             new UpdateStudent();
         } else if (msg.equals("Update Lecturer Details")) {
             new UpdateLecturer();
+        } else if (msg.equals("Update Subject Details")) {
+            new UpdateSubject();
+        } else if (msg.equals("Fee Form")) {
+            new StudentFeeForm();
+        } else if (msg.equals("Fee Details")) {
+            new FeeDetails();
+        } else if (msg.equals("Fee Structure")) {
+            new FeeStructure();
         } else if (msg.equals("About")) {
             new About();
         }

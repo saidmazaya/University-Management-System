@@ -85,6 +85,28 @@ public class FakultasDetails extends JFrame implements ActionListener {
 
         setSize(900, 600);
         setLocation(300, 100);
+
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Load the background image
+                ImageIcon backgroundImage = new ImageIcon(ClassLoader.getSystemResource("images/background.jpg"));
+                Image img = backgroundImage.getImage();
+                // Draw the background image
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
+
+        // Set the layout manager for the backgroundPanel to null
+        backgroundPanel.setLayout(null);
+
+        // Set the bounds of the backgroundPanel
+        backgroundPanel.setBounds(0, 0, 900, 650);
+
+        // Add the backgroundPanel to the content pane
+        add(backgroundPanel);
+
         setVisible(true);
         setLocationRelativeTo(null);
     }

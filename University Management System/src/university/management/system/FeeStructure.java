@@ -33,6 +33,27 @@ public class FeeStructure extends JFrame {
         JScrollPane jsp = new JScrollPane(table);
         jsp.setBounds(0, 60, 1000, 700);
         add(jsp);
+
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Load the background image
+                ImageIcon backgroundImage = new ImageIcon(ClassLoader.getSystemResource("images/background.jpg"));
+                Image img = backgroundImage.getImage();
+                // Draw the background image
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
+
+        // Set the layout manager for the backgroundPanel to null
+        backgroundPanel.setLayout(null);
+
+        // Set the bounds of the backgroundPanel
+        backgroundPanel.setBounds(0, 0, 1000, 610);
+
+        // Add the backgroundPanel to the content pane
+        add(backgroundPanel);
         
         setVisible(true);
         

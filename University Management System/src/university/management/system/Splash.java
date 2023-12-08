@@ -16,7 +16,7 @@ public class Splash extends JFrame implements Runnable {
         panel.setBackground(new Color(0, 128, 0));// Set the background color to green
 
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/usu.png"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/usu.png"));
         Image i2 = i1.getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);

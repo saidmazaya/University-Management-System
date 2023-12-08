@@ -9,7 +9,7 @@ public class StudentFeeForm extends JFrame implements ActionListener {
 
     Choice cnim, jlhtagihan;
     JComboBox cbsemester, cbstatus;
-    JLabel lbltunggakan, lbltagihan, labelprodi, lblfname, lblPaymentStatus;
+    JLabel lbltagihan, labelprodi, lblfname, lblPaymentStatus;
     JButton pay, back;
 
     JTextField tfjlhpembayaran;
@@ -18,10 +18,9 @@ public class StudentFeeForm extends JFrame implements ActionListener {
         setSize(900, 500);
         setLocation(300, 100);
         setLayout(null);
-
         getContentPane().setBackground(Color.WHITE);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/usu.png"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/usu.png"));
         Image i2 = i1.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
@@ -120,7 +119,7 @@ public class StudentFeeForm extends JFrame implements ActionListener {
 
         lbltagihan = new JLabel("Jumlah Tagihan");
         lbltagihan.setBounds(40, 200, 500, 20);
-        lbltagihan.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lbltagihan.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(lbltagihan);
 
         cnim.addItemListener(new ItemListener() {
@@ -158,32 +157,21 @@ public class StudentFeeForm extends JFrame implements ActionListener {
         });
 
         JLabel lblsemester = new JLabel("Semester");
-        lblsemester.setBounds(40, 250, 200, 30);
+        lblsemester.setBounds(40, 220, 200, 30);
         lblsemester.setFont(new Font("serif", Font.BOLD, 20));
         add(lblsemester);
 
         String semester[] = {"1", "2", "3", "4", "5", "6", "7", "8"};
         cbsemester = new JComboBox(semester);
-        cbsemester.setBounds(250, 250, 150, 30);
+        cbsemester.setBounds(250, 220, 150, 30);
         cbsemester.setFont(new Font("serif", Font.BOLD, 15));
         cbsemester.setBackground(Color.WHITE);
         add(cbsemester);
 
-        JLabel lblPaymentStatus = new JLabel("Status: Belum Bayar");
-        lblPaymentStatus.setBounds(40, 350, 400, 20);
-        lblPaymentStatus.setFont(new Font("serif", Font.BOLD, 16));
+        lblPaymentStatus = new JLabel("Status: Belum Bayar");
+        lblPaymentStatus.setBounds(40, 300, 400, 20);
+        lblPaymentStatus.setFont(new Font("serif", Font.BOLD, 20));
         add(lblPaymentStatus);
-
-
-        lbltunggakan = new JLabel("Tunggakan");
-        lbltunggakan.setBounds(40, 300, 400, 20);
-        lbltunggakan.setFont(new Font("Tahoma", Font.BOLD, 16));
-        add(lbltunggakan);
-
-        JLabel labeltunggakan = new JLabel();
-        labeltunggakan.setBounds(250, 300, 400, 20);
-        labeltunggakan.setFont(new Font("Tahoma", Font.BOLD, 16));
-        add(labeltunggakan);
 
         pay = new JButton("Pay Fee");
         pay.setBounds(150, 380, 100, 25);
@@ -201,6 +189,28 @@ public class StudentFeeForm extends JFrame implements ActionListener {
         back.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(back);
 
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Load the background image
+                ImageIcon backgroundImage = new ImageIcon(ClassLoader.getSystemResource("images/background.jpg"));
+                Image img = backgroundImage.getImage();
+                // Draw the background image
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
+
+        // Set the layout manager for the backgroundPanel to null
+        backgroundPanel.setLayout(null);
+
+        // Set the bounds of the backgroundPanel
+        backgroundPanel.setBounds(0, 0, 900, 500);
+
+        // Add the backgroundPanel to the content pane
+        add(backgroundPanel);
+
+
         setVisible(true);
     }
 
@@ -215,8 +225,9 @@ public class StudentFeeForm extends JFrame implements ActionListener {
             String status;
             if (jumlah_pembayaran.isEmpty()) {
                 status = "Belum Bayar";
+                JOptionPane.showMessageDialog(null, "Jumlah pembayaran belum diisi!");
             } else {
-                // Fetch the total fee from the database (you may need to modify this part based on your database structure)
+                // Fetch the total fee from the database
                 int totalFee = getTotalFeeFromDatabase(prodi);
                 int pembayaran = Integer.parseInt(jumlah_pembayaran);
 
@@ -224,29 +235,53 @@ public class StudentFeeForm extends JFrame implements ActionListener {
                     status = "Lunas";
                 } else if (pembayaran < totalFee) {
                     status = "Belum Lunas";
+                    JOptionPane.showMessageDialog(null, "Jumlah pembayaran belum mencukupi!");
                 } else {
                     status = "Status Tidak Diketahui"; // Handle other cases if needed
+                    JOptionPane.showMessageDialog(null, "Jumlah pembayaran berlebih!");
+                    return; // Do not proceed with the database update
                 }
             }
 
             lblPaymentStatus.setText("Status: " + status);
 
             try {
-                Conn c = new Conn();
+                Conn con = new Conn();
+                Connection connection = con.c;
 
-                // Update the fee information in the database
-                String updateQuery = "UPDATE fee SET ukt='" + jumlah_pembayaran + "', status='" + status + "' WHERE nim='" + nim + "' AND semester='" + semester + "'";
-                int rowsAffected = c.s.executeUpdate(updateQuery);
+                // Check if a record with the same nim and semester already exists
+                String selectQuery = "SELECT * FROM fee WHERE nim = ? AND semester = ?";
+                try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+                    selectStatement.setString(1, nim);
+                    selectStatement.setString(2, semester);
+                    ResultSet resultSet = selectStatement.executeQuery();
 
-                if (rowsAffected == 0) {
-                    // If no rows were affected, it means the record doesn't exist, so insert a new record
-                    String insertQuery = "INSERT INTO fee VALUES ('" + nim + "', '" + jumlah_pembayaran + "', '" + status + "', '" + semester + "')";
-                    c.s.executeUpdate(insertQuery);
+                    if (resultSet.next()) {
+                        // If a record already exists, perform an update
+                        String updateQuery = "UPDATE fee SET jumlah_pembayaran = ?, status = ? WHERE nim = ? AND semester = ?";
+                        try (PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+                            updateStatement.setString(1, jumlah_pembayaran);
+                            updateStatement.setString(2, status);
+                            updateStatement.setString(3, nim);
+                            updateStatement.setString(4, semester);
+
+                            updateStatement.executeUpdate();
+                        }
+                    } else if ("Lunas".equals(status)) {
+                        // If no record exists and payment status is Lunas, perform an insert
+                        String insertQuery = "INSERT INTO fee (nim, jumlah_pembayaran, status, semester) VALUES (?, ?, ?, ?)";
+                        try (PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
+                            insertStatement.setString(1, nim);
+                            insertStatement.setString(2, jumlah_pembayaran);
+                            insertStatement.setString(3, status);
+                            insertStatement.setString(4, semester);
+
+                            insertStatement.executeUpdate();
+                        }
+                        JOptionPane.showMessageDialog(null, "College fee submitted successfully");
+                    }
+
                 }
-
-                JOptionPane.showMessageDialog(null, "College fee submitted successfully");
-
-                // Display the status in the JLabel
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -254,6 +289,7 @@ public class StudentFeeForm extends JFrame implements ActionListener {
             setVisible(false);
         }
     }
+
 
     private int getTotalFeeFromDatabase(String prodi) {
         // Implement the logic to fetch the total fee from the database

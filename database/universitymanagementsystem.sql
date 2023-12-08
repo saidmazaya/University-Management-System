@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2023 at 05:44 PM
+-- Generation Time: Dec 08, 2023 at 05:24 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -93,17 +93,11 @@ CREATE TABLE `fee` (
 --
 
 INSERT INTO `fee` (`nim`, `jumlah_pembayaran`, `status`, `semester`) VALUES
-(202797, '300000000', 'Belum Bayar', '1'),
-(205126, '931493598031289053890', 'Lunas', '5'),
-(205126, '2321312321312', 'Lunas', '4'),
-(202797, '2000000', 'Belum Lunas', '3'),
-(202797, '200000', 'Belum Lunas', '1'),
-(202797, '200000', 'Belum Bayar', '1'),
-(202797, '231123', 'Belum Bayar', '1'),
-(202797, '231123', 'Belum Bayar', '1'),
-(202797, '30000000', 'Lunas', '1'),
-(202797, '20000000', 'Belum Lunas', '1'),
-(202797, '20000000', 'Belum Lunas', '1');
+(205126, '80000000', 'Lunas', '1'),
+(205126, '80000000', 'Lunas', '2'),
+(205126, '80000000', 'Lunas', '3'),
+(202797, '30000000', 'Lunas', '3'),
+(205126, '80000000', 'Lunas', '4');
 
 -- --------------------------------------------------------
 

@@ -10,7 +10,7 @@ public class About extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/pbol1.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/pbol1.jpg"));
         Image i2 = i1.getImage().getScaledInstance(300, 200, Image.SCALE_SMOOTH);
         ImageIcon i3 = new ImageIcon(i2);
 
