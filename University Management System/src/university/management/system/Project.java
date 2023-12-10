@@ -10,8 +10,8 @@ public class Project extends JFrame implements ActionListener {
         setSize(1000, 550);
         setLocationRelativeTo(null);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/1.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(1000, 550, Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/landingpage.png"));
+        Image i2 = i1.getImage().getScaledInstance(1000, 500, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
         add(image);
